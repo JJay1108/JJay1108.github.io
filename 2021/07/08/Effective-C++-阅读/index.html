@@ -185,7 +185,7 @@
     
     <span class="post-meta mr-2">
       <i class="iconfont icon-chart"></i>
-      879 字
+      1k 字
     </span>
   
 
@@ -195,7 +195,7 @@
       <i class="iconfont icon-clock-fill"></i>
       
       
-      9
+      11
        分钟
     </span>
   
@@ -298,7 +298,14 @@
 <p><img src="https://gitee.com/jasonstudyield/imagesbed/raw/master/20210708220438.png" srcset="/img/loading.gif" lazyload></p>
 <p>重要： <strong>用<code>mutable</code>“骗过”编译器</strong></p>
 <p><img src="https://gitee.com/jasonstudyield/imagesbed/raw/master/20210708220501.png" srcset="/img/loading.gif" lazyload></p>
-<h3 id="在const-和-non-const成员函数中避免重复"><a href="#在const-和-non-const成员函数中避免重复" class="headerlink" title="在const 和 non-const成员函数中避免重复"></a>在const 和 non-const成员函数中避免重复</h3>
+<h3 id="在const-和-non-const成员函数中避免重复"><a href="#在const-和-non-const成员函数中避免重复" class="headerlink" title="在const 和 non-const成员函数中避免重复"></a>在const 和 non-const成员函数中避免重复</h3><p><em>暂时略……反正<code>const</code>很强就完事了……</em></p>
+<p><strong>总结：</strong></p>
+<blockquote>
+<p>将有些东西声明为<code>const</code>可以帮助编译器侦测出错误用法。 <code>const</code>可被施加于任何作用域内的对象、函数参数、函数返回类型、成员函数本体。</p>
+<p>编译器强制实施 <strong>bitwise constness</strong>, 但实际编写程序应该使用“概念上的常量性”（比如使用mutable）</p>
+<p>用<code>const</code>和<code>non-const</code>成员函数有着实质等价的实现时，令<code>non-const</code>版本调用<code>const</code>版本可避免代码的重复。</p>
+</blockquote>
+<h2 id="确定对象被使用前已先被初始化"><a href="#确定对象被使用前已先被初始化" class="headerlink" title="确定对象被使用前已先被初始化"></a>确定对象被使用前已先被初始化</h2>
             </div>
             <hr>
             <div>
