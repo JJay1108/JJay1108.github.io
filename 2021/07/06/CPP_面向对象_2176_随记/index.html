@@ -185,7 +185,7 @@
     
     <span class="post-meta mr-2">
       <i class="iconfont icon-chart"></i>
-      691 字
+      710 字
     </span>
   
 
@@ -228,8 +228,7 @@
             <h1 style="display: none">CPP_面向对象_21/7/6_随记</h1>
             
             <div class="markdown-body">
-              <ol>
-<li><p><strong>格式化输出setw(), setprecision()应用</strong></p>
+              <h1 id="CPP-面向对象-21-7-6"><a href="#CPP-面向对象-21-7-6" class="headerlink" title="CPP 面向对象 21/7/6"></a>CPP 面向对象 21/7/6</h1><h2 id="C-语法知识"><a href="#C-语法知识" class="headerlink" title="C++语法知识"></a>C++语法知识</h2><p><strong>格式化输出setw(), setprecision()应用</strong></p>
 <p>setw() 默认右对齐</p>
 <p>eg. s和a之间有7个空格，cout&lt;&lt;’s’&lt;&lt;setw(8)&lt;&lt;’a’&lt;&lt;endl;的意思是s后面输出8个字符，其中a占一个字符，剩余7个字符用空格填充</p>
 <p>setw()默认用空格填充，也可以用其他的字符填充，运用setfill()</p>
@@ -243,23 +242,25 @@
 <hr>
 <p>setprecision() + fixed 控制精确到小数点后的位数</p>
 <p><em><strong>补充：setfill()函数会永久更改填充空格的字符，下次重新用的时候注意初始化为所用的符号（默认的setw()填充为空格）</strong></em></p>
-</li>
-<li><p><strong>友元</strong></p>
-<blockquote>
+<h2 id="友元"><a href="#友元" class="headerlink" title="友元"></a>友元</h2><blockquote>
 <p>类具有封装和信息隐藏的特性。只有<a target="_blank" rel="noopener" href="https://baike.baidu.com/item/%E7%B1%BB%E7%9A%84%E6%88%90%E5%91%98%E5%87%BD%E6%95%B0">类的成员函数</a>才能访问类的私有成员，程序中的其他函数是无法访问私有成员的。非成员函数可以访问类中的公有成员，但是如果将<a target="_blank" rel="noopener" href="https://baike.baidu.com/item/%E6%95%B0%E6%8D%AE%E6%88%90%E5%91%98">数据成员</a>都定义为公有的，这又破坏了隐藏的特性。另外，应该看到在某些情况下，特别是在对某些成员函数多次调用时，由于<a target="_blank" rel="noopener" href="https://baike.baidu.com/item/%E5%8F%82%E6%95%B0%E4%BC%A0%E9%80%92">参数传递</a>，类型检查和安全性检查等都需要时间开销，而影响程序的运行效率。 </p>
 <p>为了解决上述问题，提出一种使用友元的方案。友元不是成员函数，但是它可以访问类中的私有成员。友元的作用在于提高程序的运行效率，但是，它破坏了类的封装性和隐藏性，使得非成员函数可以访问类的私有成员。不过，类的访问权限确实在某些应用场合显得有些呆板，从而容忍了友元这一特别语法现象。(from baidu)</p>
 </blockquote>
+<ol>
+<li><strong>友元函数</strong></li>
+</ol>
 <p>友元是定义在类外部的普通函数或类，但需要在<em><strong>类体中</strong></em>进行说明，用<code>friend</code>关键字加以说明。故友元函数的调用不需要对象表示，直接调用即可。</p>
 <p>友元函数没有this指针，其参数分几种情况：</p>
 <p>访问非static变量，需要对象作为参数；访问static成员或全局变量时，不需要对象做参数。</p>
+<ol start="2">
+<li><strong>友元类</strong></li>
+</ol>
 <blockquote>
 <p>友元除了函数以外，还可以是类，即一个类可以作另一个类的友元。当一个类作为另一个类的友元时，这就意味着这个类的所有成员函数都是另一个类的<a target="_blank" rel="noopener" href="https://baike.baidu.com/item/%E5%8F%8B%E5%85%83%E5%87%BD%E6%95%B0">友元函数</a>，都可以访问另一个类中的隐藏信息（包括私有成员和保护成员）。</p>
 </blockquote>
 <p>格式：</p>
 <p><code>friend class  </code> + 类名</p>
 <p><img src="https://gitee.com/jasonstudyield/imagesbed/raw/master/image-20210706131141197.png" srcset="/img/loading.gif" lazyload></p>
-</li>
-</ol>
 
             </div>
             <hr>
