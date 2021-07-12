@@ -4,6 +4,31 @@
   
   
   <entry>
+    <title>CPP_面向对象_21/7/12_随记</title>
+    <link href="/2021/07/12/2021-07-12-CPP_%E9%9D%A2%E5%90%91%E5%AF%B9%E8%B1%A1_21712_%E9%9A%8F%E8%AE%B0/"/>
+    <url>/2021/07/12/2021-07-12-CPP_%E9%9D%A2%E5%90%91%E5%AF%B9%E8%B1%A1_21712_%E9%9A%8F%E8%AE%B0/</url>
+    
+    <content type="html"><![CDATA[<h1 id="CPP-面向对象-21-7-12-随记"><a href="#CPP-面向对象-21-7-12-随记" class="headerlink" title="CPP 面向对象 21/7/12 随记"></a>CPP 面向对象 21/7/12 随记</h1><h2 id="操作符重载"><a href="#操作符重载" class="headerlink" title="操作符重载"></a>操作符重载</h2><p>使用了<code>new</code>或指针的相同类或结构体的对象间，不能使用 = 进行赋值操作，必须对 = 进行了操作符重载后，才能赋值。否则两个类的指针指向相同的内存地址。</p>]]></content>
+    
+    
+    <categories>
+      
+      <category>学习随记</category>
+      
+    </categories>
+    
+    
+    <tags>
+      
+      <tag>C++</tag>
+      
+    </tags>
+    
+  </entry>
+  
+  
+  
+  <entry>
     <title>超频一时爽，系统崩溃死机火葬场</title>
     <link href="/2021/07/12/2021-07-12-%E8%B6%85%E9%A2%91%E4%B8%80%E6%97%B6%E7%88%BD%EF%BC%8C%E7%B3%BB%E7%BB%9F%E5%B4%A9%E6%BA%83%E6%AD%BB%E6%9C%BA%E7%81%AB%E8%91%AC%E5%9C%BA/"/>
     <url>/2021/07/12/2021-07-12-%E8%B6%85%E9%A2%91%E4%B8%80%E6%97%B6%E7%88%BD%EF%BC%8C%E7%B3%BB%E7%BB%9F%E5%B4%A9%E6%BA%83%E6%AD%BB%E6%9C%BA%E7%81%AB%E8%91%AC%E5%9C%BA/</url>
