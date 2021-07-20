@@ -220,6 +220,111 @@
     <article class="col-12 col-md-12 mx-auto index-info">
       <h1 class="index-header">
         
+        <a href="/2021/07/20/2021-07-20-CPP-OPP-review(2)/" target="_self">
+          CPP-OPP review(2)
+        </a>
+      </h1>
+
+      <p class="index-excerpt">
+        <a href="/2021/07/20/2021-07-20-CPP-OPP-review(2)/" target="_self">
+          
+          
+            
+          
+          CPP-OPP review(2)
+操作符重载，可分为：成员函数（含this指针）和非成员函数。
+
+临时对象，例如之前所写的complex类,complex(2,1)创建一个**2 + i *的复数临时对象。在作为成员函数的返回值是，注意使用return by value*,因为是临时对象是 local 的。
+
+输入输出流作为参数不可以作为const传入
+
+一段代码：
+1234ostream&am
+        </a>
+      </p>
+
+      <div class="index-btm post-metas">
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-date"></i>
+            <time datetime="2021-07-20 00:00" pubdate>
+              2021-07-20
+            </time>
+          </div>
+        
+        
+        
+          <div class="post-meta">
+            <i class="iconfont icon-tags"></i>
+            
+              <a href="/tags/C-C/">C/C++</a>
+            
+          </div>
+        
+      </div>
+    </article>
+  </div>
+
+  <div class="row mx-auto index-card">
+    
+    
+    <article class="col-12 col-md-12 mx-auto index-info">
+      <h1 class="index-header">
+        
+        <a href="/2021/07/18/2021-07-18-CPP-0PP-review(1)/" target="_self">
+          CPP-OPP review(1)
+        </a>
+      </h1>
+
+      <p class="index-excerpt">
+        <a href="/2021/07/18/2021-07-18-CPP-0PP-review(1)/" target="_self">
+          
+          
+            
+          
+          CPP-OPP review(1)
+class中的成员函数，默认成为inline函数的候选
+
+外部的函数想要成为inline，需要加关键字inline
+
+构造函数的写法：
+
+赋值写法
+
+运用初值列(initialization list),进行初始化
+这两种的区别是，构造函数先进行初始化，再进行{}内部的操作，用initialization list更有效率。
+12345678class comp
+        </a>
+      </p>
+
+      <div class="index-btm post-metas">
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-date"></i>
+            <time datetime="2021-07-18 00:00" pubdate>
+              2021-07-18
+            </time>
+          </div>
+        
+        
+        
+          <div class="post-meta">
+            <i class="iconfont icon-tags"></i>
+            
+              <a href="/tags/C-C/">C/C++</a>
+            
+          </div>
+        
+      </div>
+    </article>
+  </div>
+
+  <div class="row mx-auto index-card">
+    
+    
+    <article class="col-12 col-md-12 mx-auto index-info">
+      <h1 class="index-header">
+        
         <a href="/2021/07/12/2021-07-12-CPP_%E9%9D%A2%E5%90%91%E5%AF%B9%E8%B1%A1_21712_%E9%9A%8F%E8%AE%B0/" target="_self">
           CPP_面向对象_21/7/12_随记
         </a>
@@ -232,7 +337,10 @@
             
           
           CPP 面向对象 21/7/12 随记操作符重载使用了new或指针的相同类或结构体的对象间，不能使用 = 进行赋值操作，必须对 = 进行了操作符重载后，才能赋值。否则两个类的指针指向相同的内存地址。
+继承分为public继承和private继承 （还有protected继承）
 
+派生类的访问权限由基类+继承类型 取小 得到。
+虚函数
         </a>
       </p>
 

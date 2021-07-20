@@ -18,7 +18,7 @@
   <meta name="author" content="Jason">
   <meta name="keywords" content="">
   
-  <title>CPP_面向对象_21/7/12_随记 - Study Record</title>
+  <title>CPP-OPP review(1) - Study Record</title>
 
   <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/css/bootstrap.min.css" />
 
@@ -163,7 +163,7 @@
       <div class="full-bg-img">
         <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
           <div class="page-header text-center fade-in-up">
-            <span class="h2" id="subtitle" title="CPP_面向对象_21/7/12_随记">
+            <span class="h2" id="subtitle" title="CPP-OPP review(1)">
               
             </span>
 
@@ -173,8 +173,8 @@
   
     <span class="post-meta">
       <i class="iconfont icon-date-fill" aria-hidden="true"></i>
-      <time datetime="2021-07-12 00:00" pubdate>
-        2021年7月12日 凌晨
+      <time datetime="2021-07-18 00:00" pubdate>
+        2021年7月18日 凌晨
       </time>
     </span>
   
@@ -185,7 +185,7 @@
     
     <span class="post-meta mr-2">
       <i class="iconfont icon-chart"></i>
-      114 字
+      331 字
     </span>
   
 
@@ -195,7 +195,7 @@
       <i class="iconfont icon-clock-fill"></i>
       
       
-      1
+      4
        分钟
     </span>
   
@@ -225,31 +225,46 @@
         <div class="py-5" id="board">
           <article class="post-content mx-auto">
             <!-- SEO header -->
-            <h1 style="display: none">CPP_面向对象_21/7/12_随记</h1>
+            <h1 style="display: none">CPP-OPP review(1)</h1>
             
             <div class="markdown-body">
-              <h1 id="CPP-面向对象-21-7-12-随记"><a href="#CPP-面向对象-21-7-12-随记" class="headerlink" title="CPP 面向对象 21/7/12 随记"></a>CPP 面向对象 21/7/12 随记</h1><h2 id="操作符重载"><a href="#操作符重载" class="headerlink" title="操作符重载"></a>操作符重载</h2><p>使用了<code>new</code>或指针的相同类或结构体的对象间，不能使用 = 进行赋值操作，必须对 = 进行了操作符重载后，才能赋值。否则两个类的指针指向相同的内存地址。</p>
-<h2 id="继承"><a href="#继承" class="headerlink" title="继承"></a>继承</h2><p>分为<code>public</code>继承和<code>private</code>继承 （还有<code>protected</code>继承）</p>
-<p><img src="https://gitee.com/jasonstudyield/imagesbed/raw/master/20210713082837.png" srcset="/img/loading.gif" lazyload></p>
-<p>派生类的访问权限由基类+继承类型 <em>取小</em> 得到。</p>
-<h2 id="虚函数"><a href="#虚函数" class="headerlink" title="虚函数"></a>虚函数</h2>
+              <h1 id="CPP-OPP-review-1"><a href="#CPP-OPP-review-1" class="headerlink" title="CPP-OPP review(1)"></a>CPP-OPP review(1)</h1><ol>
+<li><p>class中的成员函数，默认成为<code>inline</code>函数的候选</p>
+</li>
+<li><p>外部的函数想要成为<code>inline</code>，需要加关键字<code>inline</code></p>
+</li>
+<li><p>构造函数的写法：</p>
+<ol>
+<li><p>赋值写法</p>
+</li>
+<li><p>运用<strong>初值列</strong>(<em>initialization list</em>),进行初始化</p>
+<p>这两种的区别是，构造函数先进行初始化，再进行{}内部的操作，用<em>initialization list</em>更有效率。</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><code class="hljs c++"><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">complex</span></span><br><span class="hljs-class">&#123;</span><br>	<span class="hljs-keyword">public</span>:<br>    	<span class="hljs-built_in">complex</span>(<span class="hljs-keyword">double</span> r = <span class="hljs-number">0</span>, <span class="hljs-keyword">double</span> i = <span class="hljs-number">0</span>):<br>    		<span class="hljs-built_in">re</span>(r),<span class="hljs-built_in">im</span>(i)&#123;&#125;<br>    <span class="hljs-keyword">private</span>:<br>    	<span class="hljs-keyword">double</span> re, im;<br>&#125;;<br></code></pre></td></tr></table></figure></li>
+</ol>
+</li>
+<li><p>构造函数允许有很多个 - <strong>overloading</strong></p>
+<p><em>但如果出现以下的例子，则not allowed</em>:</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><code class="hljs c++"><span class="hljs-keyword">public</span>:<br>	<span class="hljs-built_in">complex</span>(<span class="hljs-keyword">double</span> r = <span class="hljs-number">0</span>, <span class="hljs-keyword">double</span> i = <span class="hljs-number">0</span>)<br>        :<span class="hljs-built_in">re</span>(r),<span class="hljs-built_in">im</span>(i)<br>        &#123;&#125;<span class="hljs-comment">//这里不需要加分号了</span><br>	<span class="hljs-built_in">complex</span>():<span class="hljs-built_in">re</span>(<span class="hljs-number">0</span>),<span class="hljs-built_in">im</span>(<span class="hljs-number">0</span>)&#123;&#125;<span class="hljs-comment">//与上面一个构造函数冲突</span><br><span class="hljs-keyword">private</span>:<br>	<span class="hljs-keyword">double</span> re, im;<br></code></pre></td></tr></table></figure></li>
+<li><p>构造函数也有可能写在<code>private</code>中，这种模式叫做<em>singleton</em>.</p>
+</li>
+<li><p>在写成员函数的时候，就需要考虑好，是否需要加上<code>const</code>.<strong>该加上就要加上！</strong></p>
+</li>
+<li><p>尽可能多用<em>pass-by-reference</em>，pass-by-value(to const)需要将数据 <em>打包</em> 压入栈，（可能爆栈）</p>
+</li>
+<li><p>相同<code>class</code>的各个对象互为友元，例如：</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><code class="hljs c++"><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">complex</span></span><br><span class="hljs-class">&#123;</span><br><span class="hljs-keyword">public</span>:<br>    <span class="hljs-built_in">complex</span>(<span class="hljs-keyword">double</span> r = <span class="hljs-number">0</span>, <span class="hljs-keyword">double</span> i = <span class="hljs-number">0</span>):<br>    	<span class="hljs-built_in">re</span>(r),<span class="hljs-built_in">im</span>(i)&#123;&#125;<br>    <span class="hljs-function"><span class="hljs-keyword">int</span> <span class="hljs-title">func</span><span class="hljs-params">(<span class="hljs-keyword">const</span> complex &amp;pra)</span></span><br><span class="hljs-function">    </span>&#123;<br>        <span class="hljs-keyword">return</span> (pra.re + pra.im);<br>	&#125;<br><span class="hljs-keyword">private</span>:<br>    <span class="hljs-keyword">double</span> re , im;<br>&#125;;<br><br><span class="hljs-comment">//////////以下为main函数///////</span><br>&#123;<br>    <span class="hljs-function">complex <span class="hljs-title">c1</span><span class="hljs-params">(<span class="hljs-number">2</span>,<span class="hljs-number">1</span>)</span></span>;<br>    complex c2;<br>    c2.<span class="hljs-built_in">func</span>(c1);<span class="hljs-comment">//实部虚部相加 </span><br>&#125;<br></code></pre></td></tr></table></figure></li>
+</ol>
+
             </div>
             <hr>
             <div>
               <div class="post-metas mb-3">
                 
-                  <div class="post-meta mr-3">
-                    <i class="iconfont icon-category"></i>
-                    
-                      <a class="hover-with-bg" href="/categories/%E5%AD%A6%E4%B9%A0%E9%9A%8F%E8%AE%B0/">学习随记</a>
-                    
-                  </div>
-                
                 
                   <div class="post-meta">
                     <i class="iconfont icon-tags"></i>
                     
-                      <a class="hover-with-bg" href="/tags/C/">C++</a>
+                      <a class="hover-with-bg" href="/tags/C-C/">C/C++</a>
                     
                   </div>
                 
@@ -266,9 +281,9 @@
                   <article class="post-prev col-6">
                     
                     
-                      <a href="/2021/07/18/2021-07-18-CPP-0PP-review(1)/">
+                      <a href="/2021/07/20/2021-07-20-CPP-OPP-review(2)/">
                         <i class="iconfont icon-arrowleft"></i>
-                        <span class="hidden-mobile">CPP-OPP review(1)</span>
+                        <span class="hidden-mobile">CPP-OPP review(2)</span>
                         <span class="visible-mobile">上一篇</span>
                       </a>
                     
@@ -276,8 +291,8 @@
                   <article class="post-next col-6">
                     
                     
-                      <a href="/2021/07/12/2021-07-12-%E8%B6%85%E9%A2%91%E4%B8%80%E6%97%B6%E7%88%BD%EF%BC%8C%E7%B3%BB%E7%BB%9F%E5%B4%A9%E6%BA%83%E6%AD%BB%E6%9C%BA%E7%81%AB%E8%91%AC%E5%9C%BA/">
-                        <span class="hidden-mobile">超频一时爽，系统崩溃死机火葬场</span>
+                      <a href="/2021/07/12/2021-07-12-CPP_%E9%9D%A2%E5%90%91%E5%AF%B9%E8%B1%A1_21712_%E9%9A%8F%E8%AE%B0/">
+                        <span class="hidden-mobile">CPP_面向对象_21/7/12_随记</span>
                         <span class="visible-mobile">下一篇</span>
                         <i class="iconfont icon-arrowright"></i>
                       </a>
