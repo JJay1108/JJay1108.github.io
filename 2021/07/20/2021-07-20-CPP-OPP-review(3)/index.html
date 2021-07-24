@@ -18,7 +18,7 @@
   <meta name="author" content="Jason">
   <meta name="keywords" content="">
   
-  <title>CPP-OPP review(1) - Study Record</title>
+  <title>CPP-OPP review(3) - Study Record</title>
 
   <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/css/bootstrap.min.css" />
 
@@ -163,7 +163,7 @@
       <div class="full-bg-img">
         <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
           <div class="page-header text-center fade-in-up">
-            <span class="h2" id="subtitle" title="CPP-OPP review(1)">
+            <span class="h2" id="subtitle" title="CPP-OPP review(3)">
               
             </span>
 
@@ -173,8 +173,8 @@
   
     <span class="post-meta">
       <i class="iconfont icon-date-fill" aria-hidden="true"></i>
-      <time datetime="2021-07-18 00:00" pubdate>
-        2021年7月18日 凌晨
+      <time datetime="2021-07-20 00:00" pubdate>
+        2021年7月20日 凌晨
       </time>
     </span>
   
@@ -185,7 +185,7 @@
     
     <span class="post-meta mr-2">
       <i class="iconfont icon-chart"></i>
-      379 字
+      463 字
     </span>
   
 
@@ -195,7 +195,7 @@
       <i class="iconfont icon-clock-fill"></i>
       
       
-      5
+      6
        分钟
     </span>
   
@@ -225,37 +225,38 @@
         <div class="py-5" id="board">
           <article class="post-content mx-auto">
             <!-- SEO header -->
-            <h1 style="display: none">CPP-OPP review(1)</h1>
+            <h1 style="display: none">CPP-OPP review(3)</h1>
             
             <div class="markdown-body">
-              <h1 id="CPP-OPP-review-1"><a href="#CPP-OPP-review-1" class="headerlink" title="CPP-OPP review(1)"></a>CPP-OPP review(1)</h1><p>这个<em>review</em>系列是本人观看侯捷老师的面向对象的讲解视频，并结合 <em>effective C++</em> 这本经典书籍，进行的一些知识点的零散记录。</p>
+              <h1 id="CPP-OPP-review-3"><a href="#CPP-OPP-review-3" class="headerlink" title="CPP-OPP review(3)"></a>CPP-OPP review(3)</h1><p>A<strong>BIG THREE</strong>:</p>
+<ol>
+<li>拷贝构造函数</li>
+<li>拷贝赋值函数</li>
+<li>析构 </li>
+</ol>
+<p>有指针成员的函数，必须要有拷贝构造+拷贝赋值  </p>
+<p>否则就产生多重引用</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br></pre></td><td class="code"><pre><code class="hljs C++"><br><span class="hljs-meta">#<span class="hljs-meta-keyword">ifndef</span> __MYSTRING__</span><br><span class="hljs-meta">#<span class="hljs-meta-keyword">define</span> __MYSTRING__</span><br><br><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">String</span></span><br><span class="hljs-class">&#123;</span><br><span class="hljs-keyword">public</span>:                                 <br>   <span class="hljs-built_in">String</span>(<span class="hljs-keyword">const</span> <span class="hljs-keyword">char</span>* cstr=<span class="hljs-number">0</span>);                     <br>   <span class="hljs-built_in">String</span>(<span class="hljs-keyword">const</span> String&amp; str);                    <br>   String&amp; <span class="hljs-keyword">operator</span>=(<span class="hljs-keyword">const</span> String&amp; str);         <br>   ~<span class="hljs-built_in">String</span>();                                    <br>   <span class="hljs-function"><span class="hljs-keyword">char</span>* <span class="hljs-title">get_c_str</span><span class="hljs-params">()</span> <span class="hljs-keyword">const</span> </span>&#123; <span class="hljs-keyword">return</span> m_data; &#125;<br><span class="hljs-keyword">private</span>:<br>   <span class="hljs-keyword">char</span>* m_data;<br>&#125;;<br><br><span class="hljs-meta">#<span class="hljs-meta-keyword">include</span> <span class="hljs-meta-string">&lt;cstring&gt;</span></span><br><br><span class="hljs-function"><span class="hljs-keyword">inline</span></span><br><span class="hljs-function"><span class="hljs-title">String::String</span><span class="hljs-params">(<span class="hljs-keyword">const</span> <span class="hljs-keyword">char</span>* cstr)</span></span><br><span class="hljs-function"></span>&#123;<br>   <span class="hljs-keyword">if</span> (cstr) &#123;<br>      m_data = <span class="hljs-keyword">new</span> <span class="hljs-keyword">char</span>[<span class="hljs-built_in">strlen</span>(cstr)+<span class="hljs-number">1</span>];<span class="hljs-comment">//动态分配内存， +1因为包括结束符</span><br>      <span class="hljs-built_in">strcpy</span>(m_data, cstr);<br>   &#125;<br>   <span class="hljs-keyword">else</span> &#123;   <br>      m_data = <span class="hljs-keyword">new</span> <span class="hljs-keyword">char</span>[<span class="hljs-number">1</span>];<br>      *m_data = <span class="hljs-string">&#x27;\0&#x27;</span>;<span class="hljs-comment">//注意这里是*m_data</span><br>   &#125;<br>&#125;<br><br><span class="hljs-keyword">inline</span><br>String::~<span class="hljs-built_in">String</span>()<br>&#123;<br>   <span class="hljs-keyword">delete</span>[] m_data;<span class="hljs-comment">//注意这里是delete[]，而不是delete</span><br>&#125;<br><br><span class="hljs-keyword">inline</span><br>String&amp; String::<span class="hljs-keyword">operator</span>=(<span class="hljs-keyword">const</span> String&amp; str)<span class="hljs-comment">//拷贝赋值</span><br>&#123;<br>   <span class="hljs-keyword">if</span> (<span class="hljs-keyword">this</span> == &amp;str)<span class="hljs-comment">//&amp;符号的含义结合具体情况，加在类型后面就是引用，</span><br>       				<span class="hljs-comment">//如果加在变量名前，就是取地址</span><br>      <span class="hljs-keyword">return</span> *<span class="hljs-keyword">this</span>;<span class="hljs-comment">//这种情况检验自我赋值。例如s1 = s1;</span><br>    				<span class="hljs-comment">//特殊情况特殊处理</span><br><br>   <span class="hljs-keyword">delete</span>[] m_data;<span class="hljs-comment">//先delete，再分配空间+拷贝</span><br>   m_data = <span class="hljs-keyword">new</span> <span class="hljs-keyword">char</span>[ <span class="hljs-built_in">strlen</span>(str.m_data) + <span class="hljs-number">1</span> ];<br>   <span class="hljs-built_in">strcpy</span>(m_data, str.m_data);<br>   <span class="hljs-keyword">return</span> *<span class="hljs-keyword">this</span>;<br>&#125;<br><br><span class="hljs-function"><span class="hljs-keyword">inline</span></span><br><span class="hljs-function"><span class="hljs-title">String::String</span><span class="hljs-params">(<span class="hljs-keyword">const</span> String&amp; str)</span><span class="hljs-comment">//拷贝构造</span></span><br><span class="hljs-function"></span>&#123;<br>   m_data = <span class="hljs-keyword">new</span> <span class="hljs-keyword">char</span>[ <span class="hljs-built_in">strlen</span>(str.m_data) + <span class="hljs-number">1</span> ];<br>   <span class="hljs-built_in">strcpy</span>(m_data, str.m_data);<br>&#125;<br><br><span class="hljs-meta">#<span class="hljs-meta-keyword">include</span> <span class="hljs-meta-string">&lt;iostream&gt;</span></span><br><span class="hljs-keyword">using</span> <span class="hljs-keyword">namespace</span> std;<br><br>ostream&amp; <span class="hljs-keyword">operator</span>&lt;&lt;(ostream&amp; os, <span class="hljs-keyword">const</span> String&amp; str)<br>&#123;<br>   os &lt;&lt; str.<span class="hljs-built_in">get_c_str</span>();<br>   <span class="hljs-keyword">return</span> os;<br>&#125;<br><br><span class="hljs-meta">#<span class="hljs-meta-keyword">endif</span></span><br></code></pre></td></tr></table></figure>
+
+
+
 <hr>
-<ol>
-<li><p>class中的成员函数，默认成为<code>inline</code>函数的候选</p>
-</li>
-<li><p>外部的函数想要成为<code>inline</code>，需要加关键字<code>inline</code></p>
-</li>
-<li><p>构造函数的写法：</p>
-<ol>
-<li><p>赋值写法</p>
-</li>
-<li><p>运用<strong>初值列</strong>(<em>initialization list</em>),进行初始化</p>
-<p>这两种的区别是，构造函数先进行初始化，再进行{}内部的操作，用<em>initialization list</em>更有效率。</p>
-<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><code class="hljs c++"><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">complex</span></span><br><span class="hljs-class">&#123;</span><br>	<span class="hljs-keyword">public</span>:<br>    	<span class="hljs-built_in">complex</span>(<span class="hljs-keyword">double</span> r = <span class="hljs-number">0</span>, <span class="hljs-keyword">double</span> i = <span class="hljs-number">0</span>):<br>    		<span class="hljs-built_in">re</span>(r),<span class="hljs-built_in">im</span>(i)&#123;&#125;<br>    <span class="hljs-keyword">private</span>:<br>    	<span class="hljs-keyword">double</span> re, im;<br>&#125;;<br></code></pre></td></tr></table></figure></li>
-</ol>
-</li>
-<li><p>构造函数允许有很多个 - <strong>overloading</strong></p>
-<p><em>但如果出现以下的例子，则not allowed</em>:</p>
-<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><code class="hljs c++"><span class="hljs-keyword">public</span>:<br>	<span class="hljs-built_in">complex</span>(<span class="hljs-keyword">double</span> r = <span class="hljs-number">0</span>, <span class="hljs-keyword">double</span> i = <span class="hljs-number">0</span>)<br>        :<span class="hljs-built_in">re</span>(r),<span class="hljs-built_in">im</span>(i)<br>        &#123;&#125;<span class="hljs-comment">//这里不需要加分号了</span><br>	<span class="hljs-built_in">complex</span>():<span class="hljs-built_in">re</span>(<span class="hljs-number">0</span>),<span class="hljs-built_in">im</span>(<span class="hljs-number">0</span>)&#123;&#125;<span class="hljs-comment">//与上面一个构造函数冲突</span><br><span class="hljs-keyword">private</span>:<br>	<span class="hljs-keyword">double</span> re, im;<br></code></pre></td></tr></table></figure></li>
-<li><p>构造函数也有可能写在<code>private</code>中，这种模式叫做<em>singleton</em>.</p>
-</li>
-<li><p>在写成员函数的时候，就需要考虑好，是否需要加上<code>const</code>.<strong>该加上就要加上！</strong></p>
-</li>
-<li><p>尽可能多用<em>pass-by-reference</em>，pass-by-value(to const)需要将数据 <em>打包</em> 压入栈，（可能爆栈）</p>
-</li>
-<li><p>相同<code>class</code>的各个对象互为友元，例如：</p>
-<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><code class="hljs c++"><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">complex</span></span><br><span class="hljs-class">&#123;</span><br><span class="hljs-keyword">public</span>:<br>    <span class="hljs-built_in">complex</span>(<span class="hljs-keyword">double</span> r = <span class="hljs-number">0</span>, <span class="hljs-keyword">double</span> i = <span class="hljs-number">0</span>):<br>    	<span class="hljs-built_in">re</span>(r),<span class="hljs-built_in">im</span>(i)&#123;&#125;<br>    <span class="hljs-function"><span class="hljs-keyword">int</span> <span class="hljs-title">func</span><span class="hljs-params">(<span class="hljs-keyword">const</span> complex &amp;pra)</span></span><br><span class="hljs-function">    </span>&#123;<br>        <span class="hljs-keyword">return</span> (pra.re + pra.im);<br>	&#125;<br><span class="hljs-keyword">private</span>:<br>    <span class="hljs-keyword">double</span> re , im;<br>&#125;;<br><br><span class="hljs-comment">//////////以下为main函数///////</span><br>&#123;<br>    <span class="hljs-function">complex <span class="hljs-title">c1</span><span class="hljs-params">(<span class="hljs-number">2</span>,<span class="hljs-number">1</span>)</span></span>;<br>    complex c2;<br>    c2.<span class="hljs-built_in">func</span>(c1);<span class="hljs-comment">//实部虚部相加 </span><br>&#125;<br></code></pre></td></tr></table></figure></li>
-</ol>
+<p><img src="https://gitee.com/jasonstudyield/imagesbed/raw/master/20210723231933.png" srcset="/img/loading.gif" lazyload alt="构造函数 和 析构函数"></p>
+<p><img src="https://gitee.com/jasonstudyield/imagesbed/raw/master/20210723232041.png" srcset="/img/loading.gif" lazyload alt="拷贝构造"></p>
+<p><img src="https://gitee.com/jasonstudyield/imagesbed/raw/master/20210723232232.png" srcset="/img/loading.gif" lazyload alt="拷贝赋值函数"></p>
+<p><img src="https://gitee.com/jasonstudyield/imagesbed/raw/master/20210723232327.png" srcset="/img/loading.gif" lazyload alt="自我赋值造成可能的危险"></p>
+<hr>
+<p><img src="https://gitee.com/jasonstudyield/imagesbed/raw/master/20210723232632.png" srcset="/img/loading.gif" lazyload alt="new 申请空间"></p>
+<p><img src="https://gitee.com/jasonstudyield/imagesbed/raw/master/20210723232713.png" srcset="/img/loading.gif" lazyload alt="delete 释放空间"></p>
+<p><code>new</code>实际上先申请了一部分内存，在进行构造</p>
+<p><code>delete</code>则反过来，先调用析构函数，再释放内存</p>
+<hr>
+<p>接下来是底层的内存分配示意图</p>
+<p><img src="https://gitee.com/jasonstudyield/imagesbed/raw/master/20210723233051.png" srcset="/img/loading.gif" lazyload></p>
+<p>红色部分是 <em>cookie</em>，各占四个字节；灰色部分是 <em>debugger header</em>，以及<em>no man land</em>，当然还有内存对齐所需要的空间。    从52到64，是为了让申请的内存块大小达到16Byte的倍数。</p>
+<p>之后的图片说明了，<code>delete</code>和<code>delete[]</code>的区别：</p>
+<p><img src="https://gitee.com/jasonstudyield/imagesbed/raw/master/20210723233633.png" srcset="/img/loading.gif" lazyload alt="delete的使用"></p>
+<p>确实会造成<strong>memory leak</strong>，但其实是打<strong>？！</strong>的内存区域没有被回收，而不是想象中的<strong>21h</strong>部分。</p>
 
             </div>
             <hr>
@@ -283,9 +284,9 @@
                   <article class="post-prev col-6">
                     
                     
-                      <a href="/2021/07/20/2021-07-20-CPP-OPP-review(3)/">
+                      <a href="/2021/07/20/2021-07-20-CPP-OPP-review(2)/">
                         <i class="iconfont icon-arrowleft"></i>
-                        <span class="hidden-mobile">CPP-OPP review(3)</span>
+                        <span class="hidden-mobile">CPP-OPP review(2)</span>
                         <span class="visible-mobile">上一篇</span>
                       </a>
                     
@@ -293,8 +294,8 @@
                   <article class="post-next col-6">
                     
                     
-                      <a href="/2021/07/12/2021-07-12-CPP_%E9%9D%A2%E5%90%91%E5%AF%B9%E8%B1%A1_21712_%E9%9A%8F%E8%AE%B0/">
-                        <span class="hidden-mobile">CPP_面向对象_21/7/12_随记</span>
+                      <a href="/2021/07/18/2021-07-18-CPP-0PP-review(1)/">
+                        <span class="hidden-mobile">CPP-OPP review(1)</span>
                         <span class="visible-mobile">下一篇</span>
                         <i class="iconfont icon-arrowright"></i>
                       </a>

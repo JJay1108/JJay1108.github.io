@@ -234,12 +234,63 @@
           CPP-OPP review(2)
 操作符重载，可分为：成员函数（含this指针）和非成员函数。
 
-临时对象，例如之前所写的complex类,complex(2,1)创建一个**2 + i *的复数临时对象。在作为成员函数的返回值是，注意使用return by value*,因为是临时对象是 local 的。
+临时对象，例如之前所写的complex类,complex(2,1)创建一个**2 + i *的复数临时对象。如果在成员函数当中被临时创建，注意使用return by value*, 因为在函数中创建的对象是 local 的，临时的。
 
 输入输出流作为参数不可以作为const传入
 
 一段代码：
-1234ostream&am
+123
+        </a>
+      </p>
+
+      <div class="index-btm post-metas">
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-date"></i>
+            <time datetime="2021-07-20 00:00" pubdate>
+              2021-07-20
+            </time>
+          </div>
+        
+        
+        
+          <div class="post-meta">
+            <i class="iconfont icon-tags"></i>
+            
+              <a href="/tags/C-C/">C/C++</a>
+            
+          </div>
+        
+      </div>
+    </article>
+  </div>
+
+  <div class="row mx-auto index-card">
+    
+    
+    <article class="col-12 col-md-12 mx-auto index-info">
+      <h1 class="index-header">
+        
+        <a href="/2021/07/20/2021-07-20-CPP-OPP-review(3)/" target="_self">
+          CPP-OPP review(3)
+        </a>
+      </h1>
+
+      <p class="index-excerpt">
+        <a href="/2021/07/20/2021-07-20-CPP-OPP-review(3)/" target="_self">
+          
+          
+            
+          
+          CPP-OPP review(3)ABIG THREE:
+
+拷贝构造函数
+拷贝赋值函数
+析构 
+
+有指针成员的函数，必须要有拷贝构造+拷贝赋值  
+否则就产生多重引用
+12345678910111213141516171819202122232425262728293031323334353637383940414243444546474849505152535455565758596061626
         </a>
       </p>
 
@@ -282,7 +333,9 @@
           
             
           
-          CPP-OPP review(1)
+          CPP-OPP review(1)这个review系列是本人观看侯捷老师的面向对象的讲解视频，并结合 effective C++ 这本经典书籍，进行的一些知识点的零散记录。
+
+
 class中的成员函数，默认成为inline函数的候选
 
 外部的函数想要成为inline，需要加关键字inline
@@ -292,8 +345,7 @@ class中的成员函数，默认成为inline函数的候选
 赋值写法
 
 运用初值列(initialization list),进行初始化
-这两种的区别是，构造函数先进行初始化，再进行{}内部的操作，用initialization list更有效率。
-12345678class comp
+这两种
         </a>
       </p>
 
