@@ -1,0 +1,5 @@
+P SunQi shanghai 62223315 50
+S LiuYin shanghai 33578356 20	3	85
+S LiuYin shanghai 33578356 xx xx xx
+T LiMing beijing 86957106 	35 	3500
+E Chenlin qingdao 72245316 40 10
