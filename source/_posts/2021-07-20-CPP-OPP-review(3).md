@@ -6,7 +6,7 @@ tags: C/C++
 
 # CPP-OPP review(3)
 
-A**BIG THREE**:
+A **BIG THREE**:
 
 1. 拷贝构造函数
 2. 拷贝赋值函数
