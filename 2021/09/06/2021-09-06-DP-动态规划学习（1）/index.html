@@ -185,7 +185,7 @@
     
     <span class="post-meta mr-2">
       <i class="iconfont icon-chart"></i>
-      530 字
+      1k 字
     </span>
   
 
@@ -195,7 +195,7 @@
       <i class="iconfont icon-clock-fill"></i>
       
       
-      7
+      14
        分钟
     </span>
   
@@ -250,18 +250,66 @@
 <p><strong>输出样例</strong></p>
 <figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs">8<br></code></pre></td></tr></table></figure>
 
-<h5 id="codes"><a href="#codes" class="headerlink" title="codes"></a>codes</h5><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><code class="hljs c++"><span class="hljs-meta">#<span class="hljs-meta-keyword">include</span><span class="hljs-meta-string">&lt;iostream&gt;</span></span><br><span class="hljs-meta">#<span class="hljs-meta-keyword">include</span><span class="hljs-meta-string">&lt;algorithm&gt;</span></span><br><span class="hljs-keyword">using</span> <span class="hljs-keyword">namespace</span> std;<br><br><span class="hljs-keyword">const</span> <span class="hljs-keyword">int</span> N = <span class="hljs-number">1e3</span> + <span class="hljs-number">10</span>;<br><span class="hljs-keyword">int</span> n, m;<br><span class="hljs-keyword">int</span> v[N];<br><span class="hljs-keyword">int</span> w[N];<br><span class="hljs-keyword">int</span> f[N][N];<br><br><span class="hljs-function"><span class="hljs-keyword">int</span> <span class="hljs-title">main</span><span class="hljs-params">()</span></span><br><span class="hljs-function"></span>&#123;<br>	cin &gt;&gt; n &gt;&gt; m;<br>    <br>    <span class="hljs-keyword">for</span>(<span class="hljs-keyword">int</span> i = <span class="hljs-number">1</span>; i &lt;= n ; i ++)<br>        cin &gt;&gt; v[i] &gt;&gt; w[i];<br>   	<br>    <span class="hljs-keyword">for</span>(<span class="hljs-keyword">int</span> i = <span class="hljs-number">1</span>; i &lt;= n ; i ++)<br>        <span class="hljs-keyword">for</span>(<span class="hljs-keyword">int</span> j = <span class="hljs-number">0</span>; j &lt;= m; j ++)<br>        &#123;<br>            f[i][j] = f[i - <span class="hljs-number">1</span>][j];<br>            <span class="hljs-keyword">if</span>(j &gt;= v[i])<br>                f[i][j] = <span class="hljs-built_in">max</span>(f[i][j], f[i - <span class="hljs-number">1</span>][j - v[i]] + w[i]);<br>		&#125;<br>    cout &lt;&lt; f[n][m] &lt;&lt; endl;<br>    <br>    <span class="hljs-keyword">return</span> <span class="hljs-number">0</span>;<br>&#125;<br></code></pre></td></tr></table></figure>
+<h4 id="codes"><a href="#codes" class="headerlink" title="codes"></a>codes</h4><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><code class="hljs c++"><span class="hljs-meta">#<span class="hljs-meta-keyword">include</span><span class="hljs-meta-string">&lt;iostream&gt;</span></span><br><span class="hljs-meta">#<span class="hljs-meta-keyword">include</span><span class="hljs-meta-string">&lt;algorithm&gt;</span></span><br><span class="hljs-keyword">using</span> <span class="hljs-keyword">namespace</span> std;<br><br><span class="hljs-keyword">const</span> <span class="hljs-keyword">int</span> N = <span class="hljs-number">1e3</span> + <span class="hljs-number">10</span>;<br><span class="hljs-keyword">int</span> n, m;<br><span class="hljs-keyword">int</span> v[N];<br><span class="hljs-keyword">int</span> w[N];<br><span class="hljs-keyword">int</span> f[N][N];<br><br><span class="hljs-function"><span class="hljs-keyword">int</span> <span class="hljs-title">main</span><span class="hljs-params">()</span></span><br><span class="hljs-function"></span>&#123;<br>	cin &gt;&gt; n &gt;&gt; m;<br>    <br>    <span class="hljs-keyword">for</span>(<span class="hljs-keyword">int</span> i = <span class="hljs-number">1</span>; i &lt;= n ; i ++)<br>        cin &gt;&gt; v[i] &gt;&gt; w[i];<br>   	<br>    <span class="hljs-keyword">for</span>(<span class="hljs-keyword">int</span> i = <span class="hljs-number">1</span>; i &lt;= n ; i ++)<br>        <span class="hljs-keyword">for</span>(<span class="hljs-keyword">int</span> j = <span class="hljs-number">0</span>; j &lt;= m; j ++)<br>        &#123;<br>            f[i][j] = f[i - <span class="hljs-number">1</span>][j];<br>            <span class="hljs-keyword">if</span>(j &gt;= v[i])<br>                f[i][j] = <span class="hljs-built_in">max</span>(f[i][j], f[i - <span class="hljs-number">1</span>][j - v[i]] + w[i]);<br>		&#125;<br>    cout &lt;&lt; f[n][m] &lt;&lt; endl;<br>    <br>    <span class="hljs-keyword">return</span> <span class="hljs-number">0</span>;<br>&#125;<br></code></pre></td></tr></table></figure>
 
 <p><strong>改进为一维后：</strong></p>
 <figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><code class="hljs c++"><span class="hljs-meta">#<span class="hljs-meta-keyword">include</span><span class="hljs-meta-string">&lt;iostream&gt;</span></span><br><span class="hljs-meta">#<span class="hljs-meta-keyword">include</span><span class="hljs-meta-string">&lt;algorithm&gt;</span></span><br><span class="hljs-keyword">using</span> <span class="hljs-keyword">namespace</span> std;<br><br><span class="hljs-keyword">const</span> <span class="hljs-keyword">int</span> N = <span class="hljs-number">1e3</span> + <span class="hljs-number">10</span>;<br><span class="hljs-keyword">int</span> n, m;<br><span class="hljs-keyword">int</span> v[N];<br><span class="hljs-keyword">int</span> w[N];<br><span class="hljs-keyword">int</span> f[N];<br><br><span class="hljs-function"><span class="hljs-keyword">int</span> <span class="hljs-title">main</span><span class="hljs-params">()</span></span><br><span class="hljs-function"></span>&#123;<br>	cin &gt;&gt; n &gt;&gt; m;<br>    <br>    <span class="hljs-keyword">for</span>(<span class="hljs-keyword">int</span> i = <span class="hljs-number">1</span>; i &lt;= n ; i ++)<br>        cin &gt;&gt; v[i] &gt;&gt; w[i];<br>   	<br>    <span class="hljs-keyword">for</span>(<span class="hljs-keyword">int</span> i = <span class="hljs-number">1</span>; i &lt;= n ; i ++)<br>        <span class="hljs-keyword">for</span>(<span class="hljs-keyword">int</span> j = m; j &gt;= v[i]; j --)<span class="hljs-comment">//这边进行了一个逆向</span><br>        &#123;<br>        <span class="hljs-comment">//    f[i][j] = f[i - 1][j];</span><br>        <span class="hljs-comment">//    if(j &gt;= v[i])</span><br>                f[j] = <span class="hljs-built_in">max</span>(f[j], f[j - v[i]] + w[i]);<br>		&#125;		<br>    cout &lt;&lt; f[m] &lt;&lt; endl;<br>    <span class="hljs-keyword">return</span> <span class="hljs-number">0</span>;<br>&#125;<br></code></pre></td></tr></table></figure>
 
 
 
+<h2 id="线性DP"><a href="#线性DP" class="headerlink" title="线性DP"></a>线性DP</h2><h3 id="最长公共子序列"><a href="#最长公共子序列" class="headerlink" title="最长公共子序列"></a>最长公共子序列</h3><p>给定两个长度分别为 N 和 M 的字符串 A 和 B，求既是 A 的子序列又是 B 的子序列的字符串长度最长是多少。</p>
+<p><strong>输入格式</strong></p>
+<p>第一行包含两个整数 N 和 M。</p>
+<p>第二行包含一个长度为 N 的字符串，表示字符串 A。</p>
+<p>第三行包含一个长度为 M 的字符串，表示字符串 B。</p>
+<p>字符串均由小写字母构成。</p>
+<p><strong>输出格式</strong></p>
+<p>输出一个整数，表示最大长度。</p>
+<p><strong>数据范围</strong></p>
+<p>1≤N,M≤1000</p>
+<p><strong>输入样例</strong></p>
+<figure class="highlight apache"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs apache"><span class="hljs-attribute">4</span> <span class="hljs-number">5</span><br><span class="hljs-attribute">abcd</span><br><span class="hljs-attribute">abedc</span><br></code></pre></td></tr></table></figure>
+
+<p><strong>输出样例</strong></p>
+<figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs">3<br></code></pre></td></tr></table></figure>
+
+<h4 id="codes-1"><a href="#codes-1" class="headerlink" title="codes"></a>codes</h4><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><code class="hljs c++"><span class="hljs-meta">#<span class="hljs-meta-keyword">include</span><span class="hljs-meta-string">&lt;iostream&gt;</span></span><br><span class="hljs-keyword">using</span> <span class="hljs-keyword">namespace</span> std;<br><br><span class="hljs-keyword">const</span> <span class="hljs-keyword">int</span> N = <span class="hljs-number">1e3</span> + <span class="hljs-number">10</span>;<br><span class="hljs-keyword">int</span> f[N][N];<br><span class="hljs-keyword">char</span> a[N];<br><span class="hljs-keyword">char</span> b[N];<br><span class="hljs-keyword">int</span> n , m;<br><br><span class="hljs-function"><span class="hljs-keyword">int</span> <span class="hljs-title">main</span><span class="hljs-params">()</span></span><br><span class="hljs-function"></span>&#123;<br>    cin &gt;&gt; n &gt;&gt; m;<br>    cin &gt;&gt; a+<span class="hljs-number">1</span> &gt;&gt; b+<span class="hljs-number">1</span>;<br>    <br>    <span class="hljs-keyword">for</span>(<span class="hljs-keyword">int</span> i = <span class="hljs-number">1</span>; i &lt;= n ; i++)<br>       <span class="hljs-keyword">for</span>(<span class="hljs-keyword">int</span> j = <span class="hljs-number">1</span>; j &lt;= m ; j ++)<br>       &#123;<br>       		f[i][j] = <span class="hljs-built_in">max</span>(f[i<span class="hljs-number">-1</span>][j], f[i][j - <span class="hljs-number">1</span>]);<br>           	<span class="hljs-keyword">if</span>(a[i] == b[j])<br>           		f[i][j] = <span class="hljs-built_in">max</span>(f[i][j], f[i<span class="hljs-number">-1</span>][j<span class="hljs-number">-1</span>] + <span class="hljs-number">1</span>);	<br>		&#125;<br>	cout &lt;&lt; f[n][m] &lt;&lt; endl;<br>    <span class="hljs-keyword">return</span> <span class="hljs-number">0</span>;<br>&#125;<br></code></pre></td></tr></table></figure>
+
+<h3 id="最短编辑距离"><a href="#最短编辑距离" class="headerlink" title="最短编辑距离"></a>最短编辑距离</h3><p>给定两个字符串 A 和 B，现在要将 A 经过若干操作变为 B，可进行的操作有：</p>
+<ol>
+<li>删除–将字符串 A 中的某个字符删除。</li>
+<li>插入–在字符串 A 的某个位置插入某个字符。</li>
+<li>替换–将字符串 A 中的某个字符替换为另一个字符。</li>
+</ol>
+<p>现在请你求出，将 A 变为 B 至少需要进行多少次操作。</p>
+<p><strong>输入格式</strong></p>
+<p>第一行包含整数 n，表示字符串 A 的长度。</p>
+<p>第二行包含一个长度为 n 的字符串 A。</p>
+<p>第三行包含整数 m，表示字符串 B 的长度。</p>
+<p>第四行包含一个长度为 m 的字符串 B。</p>
+<p>字符串中均只包含大写字母。</p>
+<p><strong>输出格式</strong></p>
+<p>输出一个整数，表示最少操作次数。</p>
+<p><strong>数据范围</strong></p>
+<p>1≤n,m≤1000</p>
+<p><strong>输入样例</strong></p>
+<figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs">10 <br>AGTCTGACGC<br>11 <br>AGTAAGTAGGC<br></code></pre></td></tr></table></figure>
+
+<p><strong>输出样例</strong></p>
+<figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs">4<br></code></pre></td></tr></table></figure>
+
 
             </div>
             <hr>
             <div>
               <div class="post-metas mb-3">
+                
+                  <div class="post-meta mr-3">
+                    <i class="iconfont icon-category"></i>
+                    
+                      <a class="hover-with-bg" href="/categories/%E7%AE%97%E6%B3%95/">算法</a>
+                    
+                  </div>
                 
                 
                   <div class="post-meta">
@@ -285,6 +333,12 @@
                 <div class="post-prevnext">
                   <article class="post-prev col-6">
                     
+                    
+                      <a href="/2021/09/13/2021-09-13-%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C%E7%9F%A5%E8%AF%86%E7%82%B9%E6%A2%B3%E7%90%86%EF%BC%88%E8%AF%BE%E5%86%85%EF%BC%89/">
+                        <i class="iconfont icon-arrowleft"></i>
+                        <span class="hidden-mobile">计算机网络知识点梳理（课内）</span>
+                        <span class="visible-mobile">上一篇</span>
+                      </a>
                     
                   </article>
                   <article class="post-next col-6">
