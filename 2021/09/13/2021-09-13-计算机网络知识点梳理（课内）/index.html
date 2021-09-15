@@ -185,7 +185,7 @@
     
     <span class="post-meta mr-2">
       <i class="iconfont icon-chart"></i>
-      1.5k 字
+      2.3k 字
     </span>
   
 
@@ -195,7 +195,7 @@
       <i class="iconfont icon-clock-fill"></i>
       
       
-      17
+      25
        分钟
     </span>
   
@@ -277,8 +277,6 @@
 </li>
 </ol>
 <p><em>说人话就是上一层通过接口收到下一层送上门来的东西（大雾）</em></p>
-<p><strong>注意！！！！</strong></p>
-<p>这里的上下层，并不一定就是layer5相比于layer4处于上层这种……</p>
 <hr>
 <p>有个具体的生活中的例子作为类比：</p>
 <p><img src="https://gitee.com/jasonstudyield/imagesbed/raw/master/20210914000941.png" srcset="/img/loading.gif" lazyload alt="哲学家-翻译-秘书层级"></p>
@@ -340,8 +338,95 @@
 <li>Peer-to-peer communications （eg. the Internet 使用互联网不需要考虑如何实现通信）</li>
 </ol>
 </blockquote>
-<h3 id="网络参考模型"><a href="#网络参考模型" class="headerlink" title="网络参考模型"></a>网络参考模型</h3><p>博客园上有老哥做了一个OSI七层 和 TCP/IP五层模型的小总结，写的真挺好</p>
+<p><strong>面向连接和面向无连接</strong> &amp; <strong>可靠与不可靠</strong></p>
+<p>见中文书本P27-29</p>
+<img src="https://gitee.com/jasonstudyield/imagesbed/raw/master/20210915151244.png" srcset="/img/loading.gif" lazyload style="zoom:80%;" />
+
+
+
+<hr>
+<h3 id="服务与协议的关系"><a href="#服务与协议的关系" class="headerlink" title="服务与协议的关系"></a>服务与协议的关系</h3><img src="https://gitee.com/jasonstudyield/imagesbed/raw/master/20210915151621.png" srcset="/img/loading.gif" lazyload alt="书本P36 服务 vs. 协议" style="zoom:80%;" />
+
+<hr>
+<h3 id="网络参考模型"><a href="#网络参考模型" class="headerlink" title="网络参考模型"></a>网络参考模型</h3><p>博客园上有老哥做了一个OSI七层 和 TCP/IP五层模型的小总结，写的还不错</p>
 <p>链接：<a target="_blank" rel="noopener" href="https://www.cnblogs.com/qishui/p/5428938.html">OSI七层模型与TCP/IP五层模型 - SevenFormer - 博客园 (cnblogs.com)</a></p>
+<h4 id="OSI七层模型"><a href="#OSI七层模型" class="headerlink" title="OSI七层模型"></a>OSI七层模型</h4><img src="https://gitee.com/jasonstudyield/imagesbed/raw/master/20210915151739.png" srcset="/img/loading.gif" lazyload style="zoom:60%;" />
+
+<p>——<em>上图需要注意通信子网协议边界，路由涉及到第三层，交换机涉及到第二层</em>——–</p>
+<ol>
+<li><p>物理层</p>
+</li>
+<li><p>数据链路层</p>
+</li>
+<li><p>网络层</p>
+</li>
+<li><p>传输层</p>
+</li>
+<li><p>会话层</p>
+</li>
+<li><p>表示层</p>
+</li>
+<li><p>应用层</p>
+<p>用户需要的各种各样的协议，例如HTTP（超文本传输协议）</p>
+</li>
+</ol>
+<h4 id="TCP-IP参考模型"><a href="#TCP-IP参考模型" class="headerlink" title="TCP/IP参考模型"></a>TCP/IP参考模型</h4><ol>
+<li><p>链路层</p>
+<ul>
+<li>该层描述了链路必须完成什么功能，才能满足无连接的互联网络层的需求，比如串行线和经典以太网链路</li>
+<li>这不是真正意义上的一个层，而是主机和传输线路的一个接口</li>
+</ul>
+</li>
+<li><p>互联网层</p>
+<ul>
+<li>大致对应OSI网络层，该层任务是允许主机将数据包注入到任何网络，让这些数据包独立到达接收方（也许接收方在不同的网络上）（数据包到达顺序和发送顺序也可能不一）</li>
+<li>这里的internet是指一般意义上的互联网络，非现在所说的<em>互联网</em>。</li>
+<li>该层定义了官方数据包格式和协议，即IP协议，还有辅助协议因特网控制报文协议ICMP，该层还需要考虑拥塞控制问题（Congestion Control）</li>
+</ul>
+</li>
+<li><p>传输层</p>
+<ul>
+<li>允许源主机和目标主机的对等实体进行对话，如同OSI传输层</li>
+<li>定义有两个端到端的传输协议，分别是传输控制协议TCP 和 用户数据报协议 UDP</li>
+</ul>
+<p><strong>TCP:</strong></p>
+<p>可靠、面向连接；还负责流量控制（接收方和发送方）；将输入的字节流分割成离散的报文，再传递给互联网层；在目标机器，接收TCP进程会把收到的报文重新装配到输出流中。（生活实际：下载文件）</p>
+<p><strong>UDP:</strong></p>
+<p>不可靠、无连接协议；广泛应用于一次性的客户机-服务器类型的“请求-应答”查询应用，以及<strong>及时交付</strong>更为重要的应用（比如传输语音或视频）</p>
+</li>
+<li><p>应用层</p>
+<img src="https://gitee.com/jasonstudyield/imagesbed/raw/master/20210915154219.png" srcset="/img/loading.gif" lazyload style="zoom:60%;" /></li>
+</ol>
+<h4 id="两种模型的共同点和不同点"><a href="#两种模型的共同点和不同点" class="headerlink" title="两种模型的共同点和不同点"></a>两种模型的共同点和不同点</h4><p><strong>共同点：</strong></p>
+<ul>
+<li>以协议栈概念为基础；协议栈中协议彼此独立；层功能大致相似</li>
+</ul>
+<p><strong>不同点：</strong></p>
+<ul>
+<li>OSI模型核心：服务；接口；协议。</li>
+</ul>
+<img src="https://gitee.com/jasonstudyield/imagesbed/raw/master/20210915154914.png" srcset="/img/loading.gif" lazyload alt="书本P38" style="zoom:60%;" />
+
+<ul>
+<li><p>TCP/IP模型最初并没有明确区分以上三个概念；所以OSI的协议更有隐蔽性，协议更容易被替换</p>
+</li>
+<li><p>OSI由于没有考虑网络互连的问题，推行不是很方便；TCP/IP模型非常切合其本身协议，但其他协议栈不支持</p>
+</li>
+<li><p>最明显的就是层数不同……</p>
+</li>
+<li><p>OSI的网络层同时支持无连接和面向连接的通信，传输层只支持面向连接的通信；这由该层的特点所决定，因为传输服务对于用户可见</p>
+</li>
+<li><p>TCP/IP在网络层只支持无连接，传输层支持两种通信模式（TCP and UDP )，可以给用户选择的机会，对于简单的“请求-应答”协议特别重要</p>
+</li>
+</ul>
+<p><strong>两种模型的评价</strong></p>
+<img src="https://gitee.com/jasonstudyield/imagesbed/raw/master/20210915155624.png" srcset="/img/loading.gif" lazyload style="zoom:55%;" />
+
+
+
+<hr>
+<h3 id="网络标准化"><a href="#网络标准化" class="headerlink" title="网络标准化"></a>网络标准化</h3><img src="https://gitee.com/jasonstudyield/imagesbed/raw/master/20210915155751.png" srcset="/img/loading.gif" lazyload style="zoom:60%;" />
+
 
             </div>
             <hr>
