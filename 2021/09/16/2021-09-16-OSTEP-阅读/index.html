@@ -18,7 +18,7 @@
   <meta name="author" content="Jason">
   <meta name="keywords" content="">
   
-  <title>CPP_面向对象_21/7/8_随记 - Study Record</title>
+  <title>OSTEP 阅读 - Study Record</title>
 
   <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/css/bootstrap.min.css" />
 
@@ -163,7 +163,7 @@
       <div class="full-bg-img">
         <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
           <div class="page-header text-center fade-in-up">
-            <span class="h2" id="subtitle" title="CPP_面向对象_21/7/8_随记">
+            <span class="h2" id="subtitle" title="OSTEP 阅读">
               
             </span>
 
@@ -173,8 +173,8 @@
   
     <span class="post-meta">
       <i class="iconfont icon-date-fill" aria-hidden="true"></i>
-      <time datetime="2021-07-08 00:00" pubdate>
-        2021年7月8日 凌晨
+      <time datetime="2021-09-16 00:00" pubdate>
+        2021年9月16日 凌晨
       </time>
     </span>
   
@@ -185,7 +185,7 @@
     
     <span class="post-meta mr-2">
       <i class="iconfont icon-chart"></i>
-      622 字
+      1.2k 字
     </span>
   
 
@@ -195,7 +195,7 @@
       <i class="iconfont icon-clock-fill"></i>
       
       
-      7
+      12
        分钟
     </span>
   
@@ -225,50 +225,75 @@
         <div class="py-5" id="board">
           <article class="post-content mx-auto">
             <!-- SEO header -->
-            <h1 style="display: none">CPP_面向对象_21/7/8_随记</h1>
+            <h1 style="display: none">OSTEP 阅读</h1>
             
             <div class="markdown-body">
-              <h1 id="CPP-面向对象-21-07-08"><a href="#CPP-面向对象-21-07-08" class="headerlink" title="CPP 面向对象  21/07/08"></a>CPP 面向对象  21/07/08</h1><h2 id="抽象数据类型"><a href="#抽象数据类型" class="headerlink" title="抽象数据类型"></a>抽象数据类型</h2><ol>
-<li><p> <code>enum</code> <strong>枚举类型变量</strong></p>
+              <h1 id="OSTEP阅读笔记"><a href="#OSTEP阅读笔记" class="headerlink" title="OSTEP阅读笔记"></a>OSTEP阅读笔记</h1><h2 id="进程调度-chapter-7"><a href="#进程调度-chapter-7" class="headerlink" title="进程调度(chapter 7)"></a>进程调度(chapter 7)</h2><h3 id="衡量的调度指标"><a href="#衡量的调度指标" class="headerlink" title="衡量的调度指标"></a>衡量的调度指标</h3><ol>
+<li><p>周转时间</p>
+<p>T周转时间 = T完成时间 - T到达时间</p>
+<p>假设所有任务同时到达，可设到达时间= 0</p>
 </li>
-<li><p><code>struct</code><strong>类型</strong></p>
-<p>对于<code>struct</code>整体进行操作，可行的有：</p>
-<ol>
-<li>给同一<code>struct</code>类型的对象赋值（值传递或引用传递）</li>
-<li>作为函数参数返回</li>
-</ol>
-</li>
-<li><p><code>class</code><strong>类型</strong></p>
-<ol>
-<li><p>该类型中有两种成员： 数据成员 和 函数成员</p>
-</li>
-<li><p>成员默认为<code>private</code>，这一点和<code>struct</code>类型不同</p>
-</li>
-<li><p>函数成员大多应该声明为public类型</p>
-</li>
-<li><p><code>private</code>类型成员无法被外部访问，只能被该<code>class</code>成员函数 和 友元 访问</p>
-</li>
-<li><p>（默认）构造函数</p>
+<li><p>响应时间</p>
+<p>T响应时间= T首次运行- T到达时间</p>
 </li>
 </ol>
-</li>
-</ol>
+<h3 id="FIFO"><a href="#FIFO" class="headerlink" title="FIFO"></a>FIFO</h3><p>计算周转时间的例子，见下图</p>
+<h3 id="SJF-最短任务优先"><a href="#SJF-最短任务优先" class="headerlink" title="SJF 最短任务优先"></a>SJF 最短任务优先</h3><p>在任务不同时到达时，存在问题。</p>
+<h3 id="STCF-最短完成时间优先"><a href="#STCF-最短完成时间优先" class="headerlink" title="STCF 最短完成时间优先"></a>STCF 最短完成时间优先</h3><p>还有个名字 <em>抢占式最短作业优先</em></p>
+<p>每当新工作进入系统时，就会确定剩余工作和新工作中，谁的剩余时间最少，然后调度该工作</p>
+<p><em>以上的都是针对周转时间的优化方法</em></p>
+<p>接下来是对于响应时间敏感程序的调度</p>
 <hr>
-<p><em>以下更新于2021.7.9</em></p>
-<h2 id="内联函数"><a href="#内联函数" class="headerlink" title="内联函数"></a>内联函数</h2><blockquote>
-<p>在<a target="_blank" rel="noopener" href="https://baike.baidu.com/item/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%A7%91%E5%AD%A6">计算机科学</a>中，<strong>内联函数</strong>（有时称作<strong>在线函数</strong>或<strong>编译时期展开函数</strong>）是一种<a target="_blank" rel="noopener" href="https://baike.baidu.com/item/%E7%BC%96%E7%A8%8B%E8%AF%AD%E8%A8%80">编程语言</a>结构，用来建议<a target="_blank" rel="noopener" href="https://baike.baidu.com/item/%E7%BC%96%E8%AF%91%E5%99%A8">编译器</a>对一些特殊<a target="_blank" rel="noopener" href="https://baike.baidu.com/item/%E5%87%BD%E6%95%B0">函数</a>进行内联扩展（有时称作<strong>在线扩展</strong>）；也就是说建议编译器将指定的函数体插入并取代每一处调用该函数的地方（<a target="_blank" rel="noopener" href="https://baike.baidu.com/item/%E4%B8%8A%E4%B8%8B%E6%96%87">上下文</a>），从而节省了每次调用函数带来的额外时间开支。但在选择使用内联函数时，必须在程序占用空间和程序执行效率之间进行权衡，因为过多的比较复杂的函数进行内联扩展将带来很大的存储资源开支。另外还需要特别注意的是对<a target="_blank" rel="noopener" href="https://baike.baidu.com/item/%E9%80%92%E5%BD%92%E5%87%BD%E6%95%B0">递归函数</a>的内联扩展可能引起部分编译器的无穷编译。</p>
+<h3 id="轮转调度"><a href="#轮转调度" class="headerlink" title="轮转调度"></a>轮转调度</h3><p>Round-Robin, RR</p>
+<p>时间片越短，RR在响应时间上表现越好；但是时间片过短，会导致上下文切换的成本过高，影响整体性能。所以系统设计者需要权衡时间片的长度，从而摊销上下文的切换成本。</p>
+<h3 id="如果结合I-O来看……？"><a href="#如果结合I-O来看……？" class="headerlink" title="如果结合I/O来看……？"></a>如果结合I/O来看……？</h3><p>之前的情况都没有结合I/O读写，那么就有了<em>重叠</em>（overlap）操作</p>
+<p>见下图</p>
+<hr>
+<h2 id="多级反馈队列（MLFQ）-chapter-8"><a href="#多级反馈队列（MLFQ）-chapter-8" class="headerlink" title="多级反馈队列（MLFQ）(chapter 8)"></a>多级反馈队列（MLFQ）(chapter 8)</h2><blockquote>
+<p>多级反馈队列是用历史经验预测未来的一个典型的例子，操作系统中有很多地方采用了这种技术 （同样存在于计算机科学领域的很多其他地方，比如硬件的分支预测及缓存算法）。如果工作有明显的阶 段性行为，因此可以预测，那么这种方式会很有效。当然，必须十分小心地使用这种技术，因为它可能出错，让系统做出比一无所知的时候更糟的决定。(OSTEP 第57页)</p>
 </blockquote>
-<p>内联函数一般用于能够快速执行的函数，对于很小的函数也有空间上的溢出。</p>
-<p>内联函数是在函数原型的前面加上<code>inline</code>限定符, 例子如下：</p>
-<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><code class="hljs c++"><span class="hljs-meta">#<span class="hljs-meta-keyword">include</span><span class="hljs-meta-string">&lt;iostream&gt;</span></span><br><span class="hljs-keyword">using</span> <span class="hljs-keyword">namespace</span> std;<br><br><span class="hljs-function"><span class="hljs-keyword">inline</span> <span class="hljs-keyword">int</span> <span class="hljs-title">Max</span><span class="hljs-params">(<span class="hljs-keyword">int</span> x, <span class="hljs-keyword">int</span> y)</span></span><br><span class="hljs-function"></span>&#123;<br>    <span class="hljs-keyword">return</span> (x &gt; y)?x:y;<br>&#125;<br><br><span class="hljs-function"><span class="hljs-keyword">int</span> <span class="hljs-title">main</span><span class="hljs-params">()</span></span><br><span class="hljs-function"></span>&#123;<br>    cout &lt;&lt; <span class="hljs-string">&quot;Max(20,10): &quot;</span> &lt;&lt; <span class="hljs-built_in">Max</span>(<span class="hljs-number">20</span>,<span class="hljs-number">10</span>) &lt;&lt; endl;<br>    cout &lt;&lt; <span class="hljs-string">&quot;Max(100,1010)： &quot;</span>&lt;&lt; <span class="hljs-built_in">Max</span>(<span class="hljs-number">100</span>,<span class="hljs-number">1010</span>) &lt;&lt; endl;<br>    <br>    <span class="hljs-keyword">return</span> <span class="hljs-number">0</span>;<br>&#125;<br></code></pre></td></tr></table></figure>
+<h3 id="基本规则"><a href="#基本规则" class="headerlink" title="基本规则"></a>基本规则</h3><p>MLFQ中有很多独立队列，他们有不同的优先级。任何时刻，一个工作只可能存在于一个队列中。MLFQ总是优先执行较高优先级的工作。</p>
+<p>如果一个队列中有多个工作，则使用RR（轮转调度）的方式进行。</p>
+<img src="https://gitee.com/jasonstudyield/imagesbed/raw/master/20210916215215.png" srcset="/img/loading.gif" lazyload alt="书本P58" style="zoom:100%;" />
 
-<p><strong>总结:</strong></p>
-<p>内联函数是为了解决函数调用的效率问题。编译的时候，调用式用函数体进行替换；而其他的函数都是在运行的时候才被替代。    故实际上是通过<strong>空间换时间</strong>。以下有几个注意点：</p>
-<ol>
-<li>循环语句，开关语句不允许出现</li>
-<li>内联函数的定义，需要出现在函数第一次调用之前</li>
-<li>类结构中所在的类说明内部定义的函数是内联函数。</li>
+
+
+<h3 id="优化的开始……？"><a href="#优化的开始……？" class="headerlink" title="优化的开始……？"></a>优化的开始……？</h3><h4 id="改变优先级"><a href="#改变优先级" class="headerlink" title="改变优先级"></a>改变优先级</h4><p>工作进入系统时，放入最高优先级；用完整个时间片后，降低优先级（进入别的队列）；如果是在时间片内主动释放CPU，优先级不变（比如时间片内进行I/O读写）</p>
+<p>简单的几个例子：</p>
+<p><strong>单个长工作</strong></p>
+<p><img src="https://gitee.com/jasonstudyield/imagesbed/raw/master/20210916215626.png" srcset="/img/loading.gif" lazyload></p>
+<p><strong>加了个短工作</strong></p>
+<p><img src="https://gitee.com/jasonstudyield/imagesbed/raw/master/20210916215742.png" srcset="/img/loading.gif" lazyload></p>
+<p>将一个新来的任务默认为短任务；并把它置于最高优先级。（长时间的工作，优先级一般都在最底下了……）</p>
+<p>在上图这种情况下，类似于SJF，即最短任务优先的情况；如果说不是一个短任务，其优先级也会逐渐降级。（最后有可能进入队列Q0）</p>
+<p><strong>考虑I/O呢？</strong></p>
+<p><img src="https://gitee.com/jasonstudyield/imagesbed/raw/master/20210916220239.png" srcset="/img/loading.gif" lazyload alt="书本P59"></p>
+<img src="https://gitee.com/jasonstudyield/imagesbed/raw/master/20210916220307.png" srcset="/img/loading.gif" lazyload style="zoom:120%;" />
+
+<h3 id="上述方案存在的一些问题"><a href="#上述方案存在的一些问题" class="headerlink" title="上述方案存在的一些问题"></a>上述方案存在的一些问题</h3><ol>
+<li><p>如果遇到很多I/O读取的程序，长时间的程序有可能就没机会使用CPU资源，就饿死了。</p>
+</li>
+<li><p>存在一些程序花里胡哨，使用欺骗手段。<strong>比如说</strong></p>
+<p>​    在一个时间片快结束的时候发起一个I/O读写，从而继续顺利占领最高优先级，达到几乎”独占“使用CPU资源。</p>
+</li>
 </ol>
+<h3 id="再次尝试"><a href="#再次尝试" class="headerlink" title="再次尝试"></a>再次尝试</h3><p>针对之前的一些问题，（比如有工作饿死等等）有了以下的继续尝试</p>
+<h4 id="周期性提升优先级"><a href="#周期性提升优先级" class="headerlink" title="周期性提升优先级"></a>周期性提升优先级</h4><p><img src="C:/Users/Junjie1108/AppData/Roaming/Typora/typora-user-images/image-20210916221158748.png" srcset="/img/loading.gif" lazyload alt="书本P60"></p>
+<p>当然，仍存在着一些问题……这个时间段S怎么确定下来呢？过长导致长工作仍会”饿“；过短的话，交互性工作得不到合适的CPU时间比例。这个值也被<em>John Ousterhout</em>称为 Voo-doo constant </p>
+<h4 id="进行进程消耗时间的统计"><a href="#进行进程消耗时间的统计" class="headerlink" title="进行进程消耗时间的统计"></a>进行进程消耗时间的统计</h4><p><em>这是之前所提的针对的程序欺骗的情形，所采取的手段</em></p>
+<p>调度程序去记录一个进程在某一个层级所消耗的总时间；而不是调度时重新计时。（这里不管进程是一次性用完的，还是分好几次用完的）</p>
+<p>对比如下图所示</p>
+<p><img src="https://gitee.com/jasonstudyield/imagesbed/raw/master/20210916221829.png" srcset="/img/loading.gif" lazyload alt="image-20210916221829365"></p>
+<h3 id="MLFQ调优及其他问题"><a href="#MLFQ调优及其他问题" class="headerlink" title="MLFQ调优及其他问题"></a>MLFQ调优及其他问题</h3><p>……</p>
+<p><em><strong>配置多少队列？队列的时间片配置多大？提升优先级的S时间段大小又怎么定？</strong></em></p>
+<p>……</p>
+<p>其实可以，在高优先级的队列中使用较短的时间片，适合交互工作更快切换；低优先级队列的时间片更长，更适合需要CPU资源的进程进行工作。</p>
+<p>还有些规则使用数学公式计算，期望的估计进行进程优先级的切换。</p>
+<h3 id="小结"><a href="#小结" class="headerlink" title="小结"></a>小结</h3><p><img src="https://gitee.com/jasonstudyield/imagesbed/raw/master/20210916222941.png" srcset="/img/loading.gif" lazyload alt="书本P63"></p>
+<blockquote>
+<p>MLFQ 以史为鉴：关注进程的一贯表现，然后区别对待。</p>
+<p>操作系统应 尽可能多地使用建议（advice），在进程调度，还有其他的各个领域，也有类似的方式。</p>
+</blockquote>
 
             </div>
             <hr>
@@ -278,7 +303,7 @@
                   <div class="post-meta mr-3">
                     <i class="iconfont icon-category"></i>
                     
-                      <a class="hover-with-bg" href="/categories/%E5%AD%A6%E4%B9%A0%E9%9A%8F%E8%AE%B0/">学习随记</a>
+                      <a class="hover-with-bg" href="/categories/%E8%AF%BB%E4%B9%A6/">读书</a>
                     
                   </div>
                 
@@ -286,7 +311,7 @@
                   <div class="post-meta">
                     <i class="iconfont icon-tags"></i>
                     
-                      <a class="hover-with-bg" href="/tags/C-C/">C/C++</a>
+                      <a class="hover-with-bg" href="/tags/OS/">OS</a>
                     
                   </div>
                 
@@ -303,18 +328,12 @@
                   <article class="post-prev col-6">
                     
                     
-                      <a href="/2021/07/12/2021-07-12-CPP_%E9%9D%A2%E5%90%91%E5%AF%B9%E8%B1%A1_21712_%E9%9A%8F%E8%AE%B0/">
-                        <i class="iconfont icon-arrowleft"></i>
-                        <span class="hidden-mobile">CPP_面向对象_21/7/12_随记</span>
-                        <span class="visible-mobile">上一篇</span>
-                      </a>
-                    
                   </article>
                   <article class="post-next col-6">
                     
                     
-                      <a href="/2021/07/08/Effective-C++-%E9%98%85%E8%AF%BB/">
-                        <span class="hidden-mobile">《Effective C++》 阅读随记</span>
+                      <a href="/2021/09/13/2021-09-13-%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C%E7%9F%A5%E8%AF%86%E7%82%B9%E6%A2%B3%E7%90%86%EF%BC%88%E8%AF%BE%E5%86%85%EF%BC%89/">
+                        <span class="hidden-mobile">计算机网络知识点梳理（课内）</span>
                         <span class="visible-mobile">下一篇</span>
                         <i class="iconfont icon-arrowright"></i>
                       </a>

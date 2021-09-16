@@ -4,6 +4,31 @@
   
   
   <entry>
+    <title>OSTEP 阅读</title>
+    <link href="/2021/09/16/2021-09-16-OSTEP-%E9%98%85%E8%AF%BB/"/>
+    <url>/2021/09/16/2021-09-16-OSTEP-%E9%98%85%E8%AF%BB/</url>
+    
+    <content type="html"><![CDATA[<h1 id="OSTEP阅读笔记"><a href="#OSTEP阅读笔记" class="headerlink" title="OSTEP阅读笔记"></a>OSTEP阅读笔记</h1><h2 id="进程调度-chapter-7"><a href="#进程调度-chapter-7" class="headerlink" title="进程调度(chapter 7)"></a>进程调度(chapter 7)</h2><h3 id="衡量的调度指标"><a href="#衡量的调度指标" class="headerlink" title="衡量的调度指标"></a>衡量的调度指标</h3><ol><li><p>周转时间</p><p>T周转时间 = T完成时间 - T到达时间</p><p>假设所有任务同时到达，可设到达时间= 0</p></li><li><p>响应时间</p><p>T响应时间= T首次运行- T到达时间</p></li></ol><h3 id="FIFO"><a href="#FIFO" class="headerlink" title="FIFO"></a>FIFO</h3><p>计算周转时间的例子，见下图</p><h3 id="SJF-最短任务优先"><a href="#SJF-最短任务优先" class="headerlink" title="SJF 最短任务优先"></a>SJF 最短任务优先</h3><p>在任务不同时到达时，存在问题。</p><h3 id="STCF-最短完成时间优先"><a href="#STCF-最短完成时间优先" class="headerlink" title="STCF 最短完成时间优先"></a>STCF 最短完成时间优先</h3><p>还有个名字 <em>抢占式最短作业优先</em></p><p>每当新工作进入系统时，就会确定剩余工作和新工作中，谁的剩余时间最少，然后调度该工作</p><p><em>以上的都是针对周转时间的优化方法</em></p><p>接下来是对于响应时间敏感程序的调度</p><hr><h3 id="轮转调度"><a href="#轮转调度" class="headerlink" title="轮转调度"></a>轮转调度</h3><p>Round-Robin, RR</p><p>时间片越短，RR在响应时间上表现越好；但是时间片过短，会导致上下文切换的成本过高，影响整体性能。所以系统设计者需要权衡时间片的长度，从而摊销上下文的切换成本。</p><h3 id="如果结合I-O来看……？"><a href="#如果结合I-O来看……？" class="headerlink" title="如果结合I/O来看……？"></a>如果结合I/O来看……？</h3><p>之前的情况都没有结合I/O读写，那么就有了<em>重叠</em>（overlap）操作</p><p>见下图</p><hr><h2 id="多级反馈队列（MLFQ）-chapter-8"><a href="#多级反馈队列（MLFQ）-chapter-8" class="headerlink" title="多级反馈队列（MLFQ）(chapter 8)"></a>多级反馈队列（MLFQ）(chapter 8)</h2><blockquote><p>多级反馈队列是用历史经验预测未来的一个典型的例子，操作系统中有很多地方采用了这种技术 （同样存在于计算机科学领域的很多其他地方，比如硬件的分支预测及缓存算法）。如果工作有明显的阶 段性行为，因此可以预测，那么这种方式会很有效。当然，必须十分小心地使用这种技术，因为它可能出错，让系统做出比一无所知的时候更糟的决定。(OSTEP 第57页)</p></blockquote><h3 id="基本规则"><a href="#基本规则" class="headerlink" title="基本规则"></a>基本规则</h3><p>MLFQ中有很多独立队列，他们有不同的优先级。任何时刻，一个工作只可能存在于一个队列中。MLFQ总是优先执行较高优先级的工作。</p><p>如果一个队列中有多个工作，则使用RR（轮转调度）的方式进行。</p><img src="https://gitee.com/jasonstudyield/imagesbed/raw/master/20210916215215.png" alt="书本P58" style="zoom:100%;" /><h3 id="优化的开始……？"><a href="#优化的开始……？" class="headerlink" title="优化的开始……？"></a>优化的开始……？</h3><h4 id="改变优先级"><a href="#改变优先级" class="headerlink" title="改变优先级"></a>改变优先级</h4><p>工作进入系统时，放入最高优先级；用完整个时间片后，降低优先级（进入别的队列）；如果是在时间片内主动释放CPU，优先级不变（比如时间片内进行I/O读写）</p><p>简单的几个例子：</p><p><strong>单个长工作</strong></p><p><img src="https://gitee.com/jasonstudyield/imagesbed/raw/master/20210916215626.png"></p><p><strong>加了个短工作</strong></p><p><img src="https://gitee.com/jasonstudyield/imagesbed/raw/master/20210916215742.png"></p><p>将一个新来的任务默认为短任务；并把它置于最高优先级。（长时间的工作，优先级一般都在最底下了……）</p><p>在上图这种情况下，类似于SJF，即最短任务优先的情况；如果说不是一个短任务，其优先级也会逐渐降级。（最后有可能进入队列Q0）</p><p><strong>考虑I/O呢？</strong></p><p><img src="https://gitee.com/jasonstudyield/imagesbed/raw/master/20210916220239.png" alt="书本P59"></p><img src="https://gitee.com/jasonstudyield/imagesbed/raw/master/20210916220307.png" style="zoom:120%;" /><h3 id="上述方案存在的一些问题"><a href="#上述方案存在的一些问题" class="headerlink" title="上述方案存在的一些问题"></a>上述方案存在的一些问题</h3><ol><li><p>如果遇到很多I/O读取的程序，长时间的程序有可能就没机会使用CPU资源，就饿死了。</p></li><li><p>存在一些程序花里胡哨，使用欺骗手段。<strong>比如说</strong></p><p>​    在一个时间片快结束的时候发起一个I/O读写，从而继续顺利占领最高优先级，达到几乎”独占“使用CPU资源。</p></li></ol><h3 id="再次尝试"><a href="#再次尝试" class="headerlink" title="再次尝试"></a>再次尝试</h3><p>针对之前的一些问题，（比如有工作饿死等等）有了以下的继续尝试</p><h4 id="周期性提升优先级"><a href="#周期性提升优先级" class="headerlink" title="周期性提升优先级"></a>周期性提升优先级</h4><p><img src="C:/Users/Junjie1108/AppData/Roaming/Typora/typora-user-images/image-20210916221158748.png" alt="书本P60"></p><p>当然，仍存在着一些问题……这个时间段S怎么确定下来呢？过长导致长工作仍会”饿“；过短的话，交互性工作得不到合适的CPU时间比例。这个值也被<em>John Ousterhout</em>称为 Voo-doo constant </p><h4 id="进行进程消耗时间的统计"><a href="#进行进程消耗时间的统计" class="headerlink" title="进行进程消耗时间的统计"></a>进行进程消耗时间的统计</h4><p><em>这是之前所提的针对的程序欺骗的情形，所采取的手段</em></p><p>调度程序去记录一个进程在某一个层级所消耗的总时间；而不是调度时重新计时。（这里不管进程是一次性用完的，还是分好几次用完的）</p><p>对比如下图所示</p><p><img src="https://gitee.com/jasonstudyield/imagesbed/raw/master/20210916221829.png" alt="image-20210916221829365"></p><h3 id="MLFQ调优及其他问题"><a href="#MLFQ调优及其他问题" class="headerlink" title="MLFQ调优及其他问题"></a>MLFQ调优及其他问题</h3><p>……</p><p><em><strong>配置多少队列？队列的时间片配置多大？提升优先级的S时间段大小又怎么定？</strong></em></p><p>……</p><p>其实可以，在高优先级的队列中使用较短的时间片，适合交互工作更快切换；低优先级队列的时间片更长，更适合需要CPU资源的进程进行工作。</p><p>还有些规则使用数学公式计算，期望的估计进行进程优先级的切换。</p><h3 id="小结"><a href="#小结" class="headerlink" title="小结"></a>小结</h3><p><img src="https://gitee.com/jasonstudyield/imagesbed/raw/master/20210916222941.png" alt="书本P63"></p><blockquote><p>MLFQ 以史为鉴：关注进程的一贯表现，然后区别对待。</p><p>操作系统应 尽可能多地使用建议（advice），在进程调度，还有其他的各个领域，也有类似的方式。</p></blockquote>]]></content>
+    
+    
+    <categories>
+      
+      <category>读书</category>
+      
+    </categories>
+    
+    
+    <tags>
+      
+      <tag>OS</tag>
+      
+    </tags>
+    
+  </entry>
+  
+  
+  
+  <entry>
     <title>计算机网络知识点梳理（课内）</title>
     <link href="/2021/09/13/2021-09-13-%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C%E7%9F%A5%E8%AF%86%E7%82%B9%E6%A2%B3%E7%90%86%EF%BC%88%E8%AF%BE%E5%86%85%EF%BC%89/"/>
     <url>/2021/09/13/2021-09-13-%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C%E7%9F%A5%E8%AF%86%E7%82%B9%E6%A2%B3%E7%90%86%EF%BC%88%E8%AF%BE%E5%86%85%EF%BC%89/</url>
@@ -134,6 +159,25 @@
   
   
   <entry>
+    <title>超频一时爽，系统崩溃死机火葬场</title>
+    <link href="/2021/07/12/2021-07-12-%E8%B6%85%E9%A2%91%E4%B8%80%E6%97%B6%E7%88%BD%EF%BC%8C%E7%B3%BB%E7%BB%9F%E5%B4%A9%E6%BA%83%E6%AD%BB%E6%9C%BA%E7%81%AB%E8%91%AC%E5%9C%BA/"/>
+    <url>/2021/07/12/2021-07-12-%E8%B6%85%E9%A2%91%E4%B8%80%E6%97%B6%E7%88%BD%EF%BC%8C%E7%B3%BB%E7%BB%9F%E5%B4%A9%E6%BA%83%E6%AD%BB%E6%9C%BA%E7%81%AB%E8%91%AC%E5%9C%BA/</url>
+    
+    <content type="html"><![CDATA[<h1 id="这周末的作死，让我对OverClock产生了阴影……"><a href="#这周末的作死，让我对OverClock产生了阴影……" class="headerlink" title="这周末的作死，让我对OverClock产生了阴影……"></a>这周末的作死，让我对OverClock产生了阴影……</h1><p>另外自己也不应该买es的CPU，在bios自检不通过的情况下，也没有妥善处理。</p><p>感谢msi，感谢Intel，感谢巨硬。也感谢    <strong>自己作大死！</strong></p>]]></content>
+    
+    
+    <categories>
+      
+      <category>日记</category>
+      
+    </categories>
+    
+    
+  </entry>
+  
+  
+  
+  <entry>
     <title>CPP_面向对象_21/7/12_随记</title>
     <link href="/2021/07/12/2021-07-12-CPP_%E9%9D%A2%E5%90%91%E5%AF%B9%E8%B1%A1_21712_%E9%9A%8F%E8%AE%B0/"/>
     <url>/2021/07/12/2021-07-12-CPP_%E9%9D%A2%E5%90%91%E5%AF%B9%E8%B1%A1_21712_%E9%9A%8F%E8%AE%B0/</url>
@@ -153,25 +197,6 @@
       <tag>C/C++</tag>
       
     </tags>
-    
-  </entry>
-  
-  
-  
-  <entry>
-    <title>超频一时爽，系统崩溃死机火葬场</title>
-    <link href="/2021/07/12/2021-07-12-%E8%B6%85%E9%A2%91%E4%B8%80%E6%97%B6%E7%88%BD%EF%BC%8C%E7%B3%BB%E7%BB%9F%E5%B4%A9%E6%BA%83%E6%AD%BB%E6%9C%BA%E7%81%AB%E8%91%AC%E5%9C%BA/"/>
-    <url>/2021/07/12/2021-07-12-%E8%B6%85%E9%A2%91%E4%B8%80%E6%97%B6%E7%88%BD%EF%BC%8C%E7%B3%BB%E7%BB%9F%E5%B4%A9%E6%BA%83%E6%AD%BB%E6%9C%BA%E7%81%AB%E8%91%AC%E5%9C%BA/</url>
-    
-    <content type="html"><![CDATA[<h1 id="这周末的作死，让我对OverClock产生了阴影……"><a href="#这周末的作死，让我对OverClock产生了阴影……" class="headerlink" title="这周末的作死，让我对OverClock产生了阴影……"></a>这周末的作死，让我对OverClock产生了阴影……</h1><p>另外自己也不应该买es的CPU，在bios自检不通过的情况下，也没有妥善处理。</p><p>感谢msi，感谢Intel，感谢巨硬。也感谢    <strong>自己作大死！</strong></p>]]></content>
-    
-    
-    <categories>
-      
-      <category>日记</category>
-      
-    </categories>
-    
     
   </entry>
   
