@@ -173,8 +173,8 @@
   
     <span class="post-meta">
       <i class="iconfont icon-date-fill" aria-hidden="true"></i>
-      <time datetime="2021-09-16 00:00" pubdate>
-        2021年9月16日 凌晨
+      <time datetime="2021-09-29 00:00" pubdate>
+        2021年9月29日 凌晨
       </time>
     </span>
   
@@ -185,7 +185,7 @@
     
     <span class="post-meta mr-2">
       <i class="iconfont icon-chart"></i>
-      1.6k 字
+      2.3k 字
     </span>
   
 
@@ -195,7 +195,7 @@
       <i class="iconfont icon-clock-fill"></i>
       
       
-      16
+      23
        分钟
     </span>
   
@@ -294,7 +294,7 @@
 <p>MLFQ 以史为鉴：关注进程的一贯表现，然后区别对待。</p>
 <p>操作系统应 尽可能多地使用建议（advice），在进程调度，还有其他的各个领域，也有类似的方式。</p>
 </blockquote>
-<h2 id="比例份额调度"><a href="#比例份额调度" class="headerlink" title="比例份额调度"></a>比例份额调度</h2><p><em>通过彩票调度，来进行CPU资源的划分；一个进程拥有的彩票数站总彩票书的百分比，就是它占有资源的份额</em></p>
+<h2 id="比例份额调度"><a href="#比例份额调度" class="headerlink" title="比例份额调度"></a>比例份额调度</h2><h3 id="彩票调度"><a href="#彩票调度" class="headerlink" title="彩票调度"></a>彩票调度</h3><p><em>通过彩票调度，来进行CPU资源的划分；一个进程拥有的彩票数站总彩票书的百分比，就是它占有资源的份额</em></p>
 <blockquote>
 <p>彩票调度的精髓在于：利用随机性。传统的一些算法（比如LRU替换策略），可能在一些负载下表现非常差，但随机方法就不会。</p>
 <p>其次，他很轻量，不需要记录状态，进程运行的时间等等。</p>
@@ -310,6 +310,28 @@
 <p>彩票通胀</p>
 <p>​    一个机制可以临时提升或降低自己的彩票数量（前天要求进程间相互信任）</p>
 <p>在这种情况下，一个进程知道自己需要更多CPU时间，则可以不与其他进程通信，直接进行与OS的告知。</p>
+<h3 id="实现"><a href="#实现" class="headerlink" title="实现"></a>实现</h3><blockquote>
+<p>彩票调度中最不可思议的，或许就是实现简单。只需要一个不错的随机数生成器来选择中奖彩票和一个记录系统中所有进程的数据结构（一个列表），以及所有彩票的总数。</p>
+</blockquote>
+<p><img src="https://gitee.com/jasonstudyield/imagesbed/raw/master/20210929231657.png" srcset="/img/loading.gif" lazyload alt="P67"></p>
+<p><img src="https://gitee.com/jasonstudyield/imagesbed/raw/master/20210929231736.png" srcset="/img/loading.gif" lazyload></p>
+<h3 id="特点-以及-问题"><a href="#特点-以及-问题" class="headerlink" title="特点 以及 问题"></a>特点 以及 问题</h3><p>一个特点：只有当工作执行非常多的时间片时，彩票调度算法才能得到期望的结果。（也就是比较公平）</p>
+<p><strong>问题在于</strong>:到底怎么为工作分配彩票呢？</p>
+<h3 id="新引入：步长调度算法"><a href="#新引入：步长调度算法" class="headerlink" title="新引入：步长调度算法"></a>新引入：步长调度算法</h3><blockquote>
+<p>你可能还想知道，究竟为什么要利用随机性？从上面的内容可以看出，虽然随机方式 可以使得调度程序的实现简单（且大致正确），但偶尔并不能产生正确的比例，尤其在工作 运行时间很短的情况下。由于这个原因，Waldspurger 提出了步长调度（stride scheduling），<br>一个确定性的公平分配算法[W95]。</p>
+</blockquote>
+<p><img src="https://gitee.com/jasonstudyield/imagesbed/raw/master/20210929232322.png" srcset="/img/loading.gif" lazyload></p>
+<p><img src="https://gitee.com/jasonstudyield/imagesbed/raw/master/20210929232352.png" srcset="/img/loading.gif" lazyload></p>
+<p>最终每个进程的运行次数恰好是票数的比例。彩票调度算法只能一段时间后，在概率上实现比例，步长调度算法可以在每个调度周期后做到完全正确。</p>
+<p>但，<strong>彩票调度的优势在于</strong>——不需要全局状态。</p>
+<p>当一个新进程中途进入，步长调度算法对于该新进程，如何设置行程值呢？而彩票调度只需要将票数加入总票数再进行计算即可。</p>
+<h3 id="小结-1"><a href="#小结-1" class="headerlink" title="小结"></a>小结</h3><p>这两种比例份额调度的算法，都没有作为CPU调度程序广泛使用，因为没有对于I/O进行很好的处理。但这种算法在容易确定比例份额的领域更有用（比如虚拟机分配资源）。</p>
+<h2 id="抽象：地址空间"><a href="#抽象：地址空间" class="headerlink" title="抽象：地址空间"></a>抽象：地址空间</h2><h3 id="多道程序和时分共享"><a href="#多道程序和时分共享" class="headerlink" title="多道程序和时分共享"></a>多道程序和时分共享</h3><p>在进程切换的时候，我们将进程信息放在内存中，这样操作系统可以更有效率地实现时分共享。如下图</p>
+<p><img src="https://gitee.com/jasonstudyield/imagesbed/raw/master/20210929233401.png" srcset="/img/loading.gif" lazyload></p>
+<p>假设只有一个进程，那么操作系统选择运行其中一个进程，其他的进程在队列中等待运行。</p>
+<h3 id="进程的地址空间"><a href="#进程的地址空间" class="headerlink" title="进程的地址空间"></a>进程的地址空间</h3><p><img src="https://gitee.com/jasonstudyield/imagesbed/raw/master/20210929233521.png" srcset="/img/loading.gif" lazyload></p>
+<p>虚拟内存的三个主要目标：透明<em>transparency</em>,效率<em>efficiency</em>,保护<em>protection</em></p>
+<p>程序不应感受到内存被虚拟化；操作系统应该保证在时、空两个维度上尽可能高效（在此过程中不得不依靠硬件支持，包括TLB的硬件功能）；保护进程之间互不干扰影响（关键概念：隔离）</p>
 
             </div>
             <hr>
