@@ -173,8 +173,8 @@
   
     <span class="post-meta">
       <i class="iconfont icon-date-fill" aria-hidden="true"></i>
-      <time datetime="2021-09-13 00:00" pubdate>
-        2021年9月13日 凌晨
+      <time datetime="2021-10-21 00:00" pubdate>
+        2021年10月21日 凌晨
       </time>
     </span>
   
@@ -185,7 +185,7 @@
     
     <span class="post-meta mr-2">
       <i class="iconfont icon-chart"></i>
-      2.3k 字
+      2.7k 字
     </span>
   
 
@@ -195,7 +195,7 @@
       <i class="iconfont icon-clock-fill"></i>
       
       
-      25
+      29
        分钟
     </span>
   
@@ -428,6 +428,45 @@
 <h3 id="网络标准化"><a href="#网络标准化" class="headerlink" title="网络标准化"></a>网络标准化</h3><img src="https://gitee.com/jasonstudyield/imagesbed/raw/master/20210915155751.png" srcset="/img/loading.gif" lazyload style="zoom:60%;" />
 
 
+
+
+
+<h2 id="第三章-数据链路层"><a href="#第三章-数据链路层" class="headerlink" title="第三章 数据链路层"></a>第三章 数据链路层</h2><h3 id="设计要素"><a href="#设计要素" class="headerlink" title="设计要素"></a>设计要素</h3><p><strong>向网络层（即链路层的上一层）提供的服务种类</strong></p>
+<ol>
+<li>提供面向无连接的服务且不带确认，如以太网（差错率较低的环境）；</li>
+<li>提供面向无连接的服务且带确认，如802.11无线网络（差错率较高）</li>
+<li>带确认的面向连接服务</li>
+</ol>
+<p><strong>成帧方法</strong></p>
+<ol>
+<li>字节计数    2. 带字节填充的首尾定界符法     3. 带比特填充的首尾定界符法    4.  物理层编码违例法</li>
+</ol>
+<p><strong>差错控制</strong><br>如：检错码    前向纠错码    重传机制</p>
+<p><strong>流量控制</strong></p>
+<h3 id="差错检测和纠正"><a href="#差错检测和纠正" class="headerlink" title="差错检测和纠正"></a>差错检测和纠正</h3><h4 id="海明码"><a href="#海明码" class="headerlink" title="海明码"></a>海明码</h4><ul>
+<li><p>海明距离的计算</p>
+</li>
+<li><p>最小海明距离和<em>纠错个数</em>，以及<em>查错个数</em>的关系</p>
+<p>海明码编码规则，以及通过海明码来纠正单位错误</p>
+</li>
+</ul>
+<p>**interleaving **编码样式</p>
+<h4 id="奇偶校验码"><a href="#奇偶校验码" class="headerlink" title="奇偶校验码"></a>奇偶校验码</h4><p>奇校验、偶校验        interleaving</p>
+<h4 id="校验和"><a href="#校验和" class="headerlink" title="校验和"></a>校验和</h4><p>校验和的计算</p>
+<p>例：</p>
+<p><img src="https://gitee.com/jasonstudyield/imagesbed/raw/master/20211021235948.png" srcset="/img/loading.gif" lazyload></p>
+<p><img src="https://gitee.com/jasonstudyield/imagesbed/raw/master/20211022000006.png" srcset="/img/loading.gif" lazyload></p>
+<p>前面多出的10加到0100上，相应得到二进制位串，接下去进行取反（0110）取反得到（1001），对应十进制数为9。在进行一波验证：</p>
+<p>如图所示</p>
+<p><img src="https://gitee.com/jasonstudyield/imagesbed/raw/master/20211022000459.png" srcset="/img/loading.gif" lazyload></p>
+<h4 id="循环冗余校验码CRC"><a href="#循环冗余校验码CRC" class="headerlink" title="循环冗余校验码CRC"></a>循环冗余校验码CRC</h4><h3 id="基本的数据链路层协议"><a href="#基本的数据链路层协议" class="headerlink" title="基本的数据链路层协议"></a>基本的数据链路层协议</h3><p>重点掌握<strong>PAR(Positive Acknowledgement with Retransmission)/ARQ（Automatic Repeat reQuest）方法。</strong></p>
+<h3 id="滑动窗口"><a href="#滑动窗口" class="headerlink" title="滑动窗口"></a>滑动窗口</h3><h3 id="数据链路层协议示例"><a href="#数据链路层协议示例" class="headerlink" title="数据链路层协议示例"></a>数据链路层协议示例</h3><ol>
+<li><strong>HDLC</strong> (High-level Data Link Control)</li>
+</ol>
+<ol start="2">
+<li><strong>PPP</strong> (Point-to-point Protocol)</li>
+</ol>
+
             </div>
             <hr>
             <div>
@@ -463,18 +502,12 @@
                   <article class="post-prev col-6">
                     
                     
-                      <a href="/2021/09/29/2021-09-16-OSTEP-%E9%98%85%E8%AF%BB/">
-                        <i class="iconfont icon-arrowleft"></i>
-                        <span class="hidden-mobile">OSTEP 阅读</span>
-                        <span class="visible-mobile">上一篇</span>
-                      </a>
-                    
                   </article>
                   <article class="post-next col-6">
                     
                     
-                      <a href="/2021/09/06/2021-09-06-DP-%E5%8A%A8%E6%80%81%E8%A7%84%E5%88%92%E5%AD%A6%E4%B9%A0%EF%BC%881%EF%BC%89/">
-                        <span class="hidden-mobile">DP-动态规划学习（1）</span>
+                      <a href="/2021/09/29/2021-09-16-OSTEP-%E9%98%85%E8%AF%BB/">
+                        <span class="hidden-mobile">OSTEP 阅读</span>
                         <span class="visible-mobile">下一篇</span>
                         <i class="iconfont icon-arrowright"></i>
                       </a>
