@@ -231,7 +231,7 @@
               <h1 id="CPP-OPP-review-2"><a href="#CPP-OPP-review-2" class="headerlink" title="CPP-OPP review(2)"></a>CPP-OPP review(2)</h1><ol>
 <li><p>操作符重载，可分为：<strong>成员函数</strong>（含<code>this</code>指针）和<strong>非成员函数</strong>。</p>
 </li>
-<li><p>临时对象，例如之前所写的<code>complex</code>类,<code>complex(2,1)</code>创建一个**2 + i *<em>的复数临时对象。如果在成员函数当中被临时创建，注意使用</em>return by value*, 因为在函数中创建的对象是 <em>local</em> 的，临时的。</p>
+<li><p>临时对象，例如之前所写的<code>complex</code>类,<code>complex(2,1)</code>创建一个 **2 + i ** 的复数临时对象。如果在成员函数当中被临时创建，注意使用 <em>return by value</em> , 因为在函数中创建的对象是 <em>local</em> 的，临时的。</p>
 </li>
 <li><p>输入输出流作为参数不可以作为<code>const</code>传入</p>
 </li>
@@ -241,6 +241,8 @@
 <p>这里为什么返回的是<code>ostream&amp;</code>，而不是<code>void</code>？</p>
 <p>因为很常见的情况：</p>
 <figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs c++"><span class="hljs-function">complex <span class="hljs-title">c1</span><span class="hljs-params">(<span class="hljs-number">2</span>,<span class="hljs-number">1</span>)</span></span>;<br><span class="hljs-function">complex <span class="hljs-title">c2</span><span class="hljs-params">(<span class="hljs-number">1</span>,<span class="hljs-number">1</span>)</span></span>;<br>cout &lt;&lt; c1;<span class="hljs-comment">//void 还是ostream&amp;返回 都可以</span><br>cout &lt;&lt; c1 &lt;&lt; c2;<span class="hljs-comment">//假设是这种情况，void返回就不行。</span><br></code></pre></td></tr></table></figure>
+
+
 
 <hr>
 </li>
@@ -284,7 +286,7 @@
                   <article class="post-next col-6">
                     
                     
-                      <a href="/2021/07/18/2021-07-18-CPP-0PP-review(1)/">
+                      <a href="/2021/07/18/2021-07-18-CPP-OPP-review(1)/">
                         <span class="hidden-mobile">CPP-OPP review(1)</span>
                         <span class="visible-mobile">下一篇</span>
                         <i class="iconfont icon-arrowright"></i>

@@ -18,7 +18,7 @@
   <meta name="author" content="Jason">
   <meta name="keywords" content="">
   
-  <title>CPP-OPP review(1) - Study Record</title>
+  <title>安卓平板、甚至手机也能写代码？Termux使用体会分享 - Study Record</title>
 
   <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/css/bootstrap.min.css" />
 
@@ -163,7 +163,7 @@
       <div class="full-bg-img">
         <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
           <div class="page-header text-center fade-in-up">
-            <span class="h2" id="subtitle" title="CPP-OPP review(1)">
+            <span class="h2" id="subtitle" title="安卓平板、甚至手机也能写代码？Termux使用体会分享">
               
             </span>
 
@@ -173,8 +173,8 @@
   
     <span class="post-meta">
       <i class="iconfont icon-date-fill" aria-hidden="true"></i>
-      <time datetime="2021-07-18 00:00" pubdate>
-        2021年7月18日 凌晨
+      <time datetime="2021-11-16 00:00" pubdate>
+        2021年11月16日 凌晨
       </time>
     </span>
   
@@ -185,7 +185,7 @@
     
     <span class="post-meta mr-2">
       <i class="iconfont icon-chart"></i>
-      379 字
+      1.8k 字
     </span>
   
 
@@ -195,7 +195,7 @@
       <i class="iconfont icon-clock-fill"></i>
       
       
-      5
+      19
        分钟
     </span>
   
@@ -225,37 +225,75 @@
         <div class="py-5" id="board">
           <article class="post-content mx-auto">
             <!-- SEO header -->
-            <h1 style="display: none">CPP-OPP review(1)</h1>
+            <h1 style="display: none">安卓平板、甚至手机也能写代码？Termux使用体会分享</h1>
             
             <div class="markdown-body">
-              <h1 id="CPP-OPP-review-1"><a href="#CPP-OPP-review-1" class="headerlink" title="CPP-OPP review(1)"></a>CPP-OPP review(1)</h1><p>这个<em>review</em>系列是本人观看侯捷老师的面向对象的讲解视频，并结合 <em>effective C++</em> 这本经典书籍，进行的一些知识点的零散记录。</p>
+              <h1 id="安卓平板、甚至手机也能写代码？Termux使用体会分享"><a href="#安卓平板、甚至手机也能写代码？Termux使用体会分享" class="headerlink" title="安卓平板、甚至手机也能写代码？Termux使用体会分享"></a>安卓平板、甚至手机也能写代码？Termux使用体会分享</h1><h2 id="起因"><a href="#起因" class="headerlink" title="起因"></a>起因</h2><p>自己几个月前在某鱼收的<strong>surface go</strong>有点废，虽然跑跑<em>VS Code</em>没啥问题，但是运行一些国产臃肿软件，就不定时卡顿……本来想去买 go3 的，但可惜囊中羞涩实在没钱；且见识有限，目光限定在大一入学前的就买来暂替笔记本的matepad。在这个过程中突然发现了<strong>Termux</strong>终端这款软件，甚至还能运行<code>python</code>，安装<code>clang</code>甚至还能跑<code>C/C++</code>（貌似<code>gcc</code>和<code>g++</code>没法直接装，但是可以通过曲线救国…)</p>
+<p><del>为什么AcWing的大佬巨巨们都在搞OI，ACM，而我已经大二了还搁着瞎折腾….？？</del></p>
+<p>最搞笑的事情是，这小东西居然还能装Linux环境？直接在上面装Ubuntu等发行版都没啥问题（虽然是arm版）</p>
+<p>从上周末开始折腾了两天，最后决定弃坑（bushi，过两天要OS考试了，即将爬了。</p>
+<p><strong>文末也提到了其他的一些方案，如AidLearning， Termux + AnLinux , tmoe脚本安装等等</strong></p>
+<h2 id="经过"><a href="#经过" class="headerlink" title="经过"></a>经过</h2><p><strong>前置要求：</strong></p>
+<ol>
+<li><p>软件：coolapk，或者D-droid， 有能力的也可以去Google-play上下载Termux。</p>
+</li>
+<li><p>硬件：运行着安卓系统的手机，正常能跑，不算太老就行。。。。如果可以的话弄个蓝牙键盘输入，按屏幕手残党落泪……</p>
+</li>
+<li><p>其他：有时间= =玩，会一点点Linux相关知识：vi编辑，ssh远程连接就可。</p>
+</li>
+</ol>
+<p>安装好之后，建议先换源。输入以下指令：</p>
+<p><code>vi $PREFIX/etc/apt/sources.list</code></p>
+<p>如果vi不会用的话，记住一下两个点就行：</p>
+<ol>
+<li><p>两个模式切换。记住<code>ESC</code>和<code>i</code>键：前者是进入Normal模式进行保存，退出等命令操作；按一下i键，就进入编辑模式，然后正常输入英文就行。</p>
+</li>
+<li><p>输入完之后，再按一下ESC键，进入了Normal模式之后，再输入<code>:wq</code>，按下回车就成功退出了。</p>
+<p><em>有个笑话：Q:如何得到一串随机字符串？ A: 让一个新人退出vim即可</em></p>
+</li>
+</ol>
+<p>换源的话，具体可以换清华源，或是科大源。这两者都能成功安装Linux环境，但似乎后者我不太会用..由于时间问题，我个人觉得前者的help docs做的更友善一点，后者没来得及多探究。</p>
 <hr>
+<p>换源后，可以安装很多软件了，这里我习惯先安装<code>openssh</code>，输入<code>pkg install openssh</code>即可，注意可能会让你输入<code>y/n</code>，输入y，按回车即可。</p>
+<p>然后输入<code>passwd</code>，自己设置ssh远程连接需要的密码。之后就可以在笔记本等平台上远程操作了，平板还行，旧手机的小屏是真的难受……</p>
+<p><img src="https://gitee.com/jasonstudyield/imagesbed/raw/master/20211116131327.png" srcset="/img/loading.gif" lazyload alt="安装ssh，这里因为我已经安装好了，所以显示的与未安装状态是不一样的"></p>
+<p><strong>这里我想说明这款软件的一个缺陷：需要保留后台程序，否则切出去之后，被“杀后台”就不妙了。具体保留后台进程相信大家都会……</strong></p>
+<p>设置完密码后，输入<code>sshd</code>开启ssh服务，之后可以在其他平台上进行远程连接来控制了。<code>sshd</code>这条命令，只要你把Termux进程<code>exit</code>出去，就要重新输入，从而开启ssh服务（当然也可以写自动化脚本？），但我还是选择保留Termux后台，反正也是自己不太用的旧手机。</p>
+<p>可以输入<code>ifconfig</code>来查看手机端的地址，如下图所示：</p>
+<p><img src="https://gitee.com/jasonstudyield/imagesbed/raw/master/20211116132316.png" srcset="/img/loading.gif" lazyload></p>
+<p>注意一个点：这里的ssh应该是以8022端口进行连接；具体连接成功的情形如下：</p>
+<p><img src="https://gitee.com/jasonstudyield/imagesbed/raw/master/20211116132748.png" srcset="/img/loading.gif" lazyload alt="我这里是用Windows Terminal连接的，局域网ip为192.168.1.100"></p>
+<p>第一个<code>Connection refused</code>就是没有开启sshd服务导致的，如果也出现连不上的情况，先考虑地址、端口问题，再考虑服务<strong>是否开启</strong>！</p>
+<p><del>后来的输入密码输错就是手残</del></p>
+<hr>
+<p><strong>安装Linux过程:</strong></p>
+<p>这里换的是清华源（也可以选择保留原来的源设置而不是覆盖）。具体参考官方帮助：</p>
+<p><a target="_blank" rel="noopener" href="https://mirrors.tuna.tsinghua.edu.cn/help/termux/">termux | 镜像站使用帮助 | 清华大学开源软件镜像站 | Tsinghua Open Source Mirror</a></p>
+<p>还原后输入<code>apt update</code>，如果出现<code>apt</code>命令无法识别，那可能还需要<code>pkg install apt</code>.</p>
+<p>随后安装<code>proot</code></p>
+<p><code>pkg install proot-distro</code></p>
+<p>之后可以输入<code>proot-distro list</code>，查看可以安装的Linux系统</p>
+<p><img src="https://gitee.com/jasonstudyield/imagesbed/raw/master/20211116135438.png" srcset="/img/loading.gif" lazyload></p>
+<p>如果想要安装Ubuntu,就输入<code>proot-distro install ubuntu</code>即可。</p>
+<p>之后就是Linux相关的设置了，想咋玩咋玩儿。</p>
+<hr>
+<h2 id="体会"><a href="#体会" class="headerlink" title="体会"></a>体会</h2><p>实际上折腾了两天，我研究出来Termux合适的用处是：</p>
 <ol>
-<li><p>class中的成员函数，默认成为<code>inline</code>函数的候选</p>
+<li><p>部分程度上替代树莓派，虽然老手机芯片还是不错的，但是树莓派的I/O扩展强得多。尤其是旧手机，有些还是MicroUSB接口，那真是谢天谢地了。搭建出的Linux环境临时测试写几个短代码还是没啥问题的。运行一些有趣的功能233，树莓派能做的，他貌似大多数也可以玩儿。（但I/O扩展太差了，本来还想外接硬盘当轻nas，很明显想多了……）</p>
 </li>
-<li><p>外部的函数想要成为<code>inline</code>，需要加关键字<code>inline</code></p>
+<li><p>Termux说到底，终端才是他最基础的功能，将之ssh连接至服务器（包括云服务器），或者任意一台电脑（有公网IP或者能采取内网穿透也行）终端写代码。这个法子的局限性在于，如果是pc/mac端，VSCode 直接配合<code>remote-SSH</code>插件就可以非常顺滑的写代码了（前提是网好……）；<strong>但是</strong>终端情况下，似乎只有<code>Vim</code> or <code>Emacs-cli</code>可以使用….</p>
+<p>（虽然这两天我配置<code>Vim</code>配的很起劲，属于发病作死了hhh，不过<code>Vim</code>现在也有强大插件支持，写C/C++确实还可以，其他语言没试过）这一点隔壁iPad/iPhone 也有iSSH可以使用。安卓端有Termux, juiceSSH，ConnectBot等软件支持。</p>
 </li>
-<li><p>构造函数的写法：</p>
-<ol>
-<li><p>赋值写法</p>
+<li><p>在Linux环境里部署code-server，随后保留Termux，切换应用到浏览器里敲代码（但我尚未尝试，并且这样的话，要求在一个局域网下，否则需要公网IP或进行内网穿透）（另：微软最近推出了vscode.dev，可以直接在浏览器写代码，但插件生态支持是个大问题）</p>
 </li>
-<li><p>运用<strong>初值列</strong>(<em>initialization list</em>),进行初始化</p>
-<p>这两种的区别是，构造函数先进行初始化，再进行{}内部的操作，用<em>initialization list</em>更有效率。</p>
-<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><code class="hljs c++"><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">complex</span></span><br><span class="hljs-class">&#123;</span><br>	<span class="hljs-keyword">public</span>:<br>    	<span class="hljs-built_in">complex</span>(<span class="hljs-keyword">double</span> r = <span class="hljs-number">0</span>, <span class="hljs-keyword">double</span> i = <span class="hljs-number">0</span>):<br>    		<span class="hljs-built_in">re</span>(r),<span class="hljs-built_in">im</span>(i)&#123;&#125;<br>    <span class="hljs-keyword">private</span>:<br>    	<span class="hljs-keyword">double</span> re, im;<br>&#125;;<br></code></pre></td></tr></table></figure></li>
+<li><p>VNC Viewer 远程Linux桌面，其实现出的效果类似于微软RDP，但配置起来也比较折腾；虽然有之前提到的别人写好的<strong>脚本安装</strong>，那一套下来还是很舒服的，网上也有成品展示。（米板5跑cs1.6，运行office各种骚操作）</p>
+</li>
+<li><p>还有<strong>AidLearning</strong>也是类似的一个开源项目，也可以达到不错的效果，虽然对老手机兼容性就不算特别好了，近三年的大概还行。</p>
+</li>
 </ol>
-</li>
-<li><p>构造函数允许有很多个 - <strong>overloading</strong></p>
-<p><em>但如果出现以下的例子，则not allowed</em>:</p>
-<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><code class="hljs c++"><span class="hljs-keyword">public</span>:<br>	<span class="hljs-built_in">complex</span>(<span class="hljs-keyword">double</span> r = <span class="hljs-number">0</span>, <span class="hljs-keyword">double</span> i = <span class="hljs-number">0</span>)<br>        :<span class="hljs-built_in">re</span>(r),<span class="hljs-built_in">im</span>(i)<br>        &#123;&#125;<span class="hljs-comment">//这里不需要加分号了</span><br>	<span class="hljs-built_in">complex</span>():<span class="hljs-built_in">re</span>(<span class="hljs-number">0</span>),<span class="hljs-built_in">im</span>(<span class="hljs-number">0</span>)&#123;&#125;<span class="hljs-comment">//与上面一个构造函数冲突</span><br><span class="hljs-keyword">private</span>:<br>	<span class="hljs-keyword">double</span> re, im;<br></code></pre></td></tr></table></figure></li>
-<li><p>构造函数也有可能写在<code>private</code>中，这种模式叫做<em>singleton</em>.</p>
-</li>
-<li><p>在写成员函数的时候，就需要考虑好，是否需要加上<code>const</code>.<strong>该加上就要加上！</strong></p>
-</li>
-<li><p>尽可能多用<em>pass-by-reference</em>，pass-by-value(to const)需要将数据 <em>打包</em> 压入栈，（可能爆栈）</p>
-</li>
-<li><p>相同<code>class</code>的各个对象互为友元，例如：</p>
-<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><code class="hljs c++"><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">complex</span></span><br><span class="hljs-class">&#123;</span><br><span class="hljs-keyword">public</span>:<br>    <span class="hljs-built_in">complex</span>(<span class="hljs-keyword">double</span> r = <span class="hljs-number">0</span>, <span class="hljs-keyword">double</span> i = <span class="hljs-number">0</span>):<br>    	<span class="hljs-built_in">re</span>(r),<span class="hljs-built_in">im</span>(i)&#123;&#125;<br>    <span class="hljs-function"><span class="hljs-keyword">int</span> <span class="hljs-title">func</span><span class="hljs-params">(<span class="hljs-keyword">const</span> complex &amp;pra)</span></span><br><span class="hljs-function">    </span>&#123;<br>        <span class="hljs-keyword">return</span> (pra.re + pra.im);<br>	&#125;<br><span class="hljs-keyword">private</span>:<br>    <span class="hljs-keyword">double</span> re , im;<br>&#125;;<br><br><span class="hljs-comment">//////////以下为main函数///////</span><br>&#123;<br>    <span class="hljs-function">complex <span class="hljs-title">c1</span><span class="hljs-params">(<span class="hljs-number">2</span>,<span class="hljs-number">1</span>)</span></span>;<br>    complex c2;<br>    c2.<span class="hljs-built_in">func</span>(c1);<span class="hljs-comment">//实部虚部相加 </span><br>&#125;<br></code></pre></td></tr></table></figure></li>
-</ol>
+<p><em>另外有个软件推荐一波，<strong>zerotier</strong>，真心不错，几个机器可以通过它“虚拟”在一个局域网内</em></p>
+<p>可能还有些别的玩法，也待各位大佬补充……（话说这会有人看吗？）</p>
+<p>如果可能的话，我之后考虑写一篇初学者配置vim的操作，或者推荐一些vim插件也行……</p>
 
             </div>
             <hr>
@@ -266,7 +304,7 @@
                   <div class="post-meta">
                     <i class="iconfont icon-tags"></i>
                     
-                      <a class="hover-with-bg" href="/tags/C-C/">C/C++</a>
+                      <a class="hover-with-bg" href="/tags/%E6%8A%98%E8%85%BE/">折腾</a>
                     
                   </div>
                 
@@ -283,18 +321,12 @@
                   <article class="post-prev col-6">
                     
                     
-                      <a href="/2021/07/20/2021-07-20-CPP-OPP-review(2)/">
-                        <i class="iconfont icon-arrowleft"></i>
-                        <span class="hidden-mobile">CPP-OPP review(2)</span>
-                        <span class="visible-mobile">上一篇</span>
-                      </a>
-                    
                   </article>
                   <article class="post-next col-6">
                     
                     
-                      <a href="/2021/07/12/2021-07-12-CPP_%E9%9D%A2%E5%90%91%E5%AF%B9%E8%B1%A1_21712_%E9%9A%8F%E8%AE%B0/">
-                        <span class="hidden-mobile">CPP_面向对象_21/7/12_随记</span>
+                      <a href="/2021/10/21/2021-09-13-%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C%E7%9F%A5%E8%AF%86%E7%82%B9%E6%A2%B3%E7%90%86%EF%BC%88%E8%AF%BE%E5%86%85%EF%BC%89/">
+                        <span class="hidden-mobile">计算机网络知识点梳理（课内）</span>
                         <span class="visible-mobile">下一篇</span>
                         <i class="iconfont icon-arrowright"></i>
                       </a>

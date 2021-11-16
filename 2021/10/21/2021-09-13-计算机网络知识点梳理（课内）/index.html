@@ -450,7 +450,7 @@
 <p>海明码编码规则，以及通过海明码来纠正单位错误</p>
 </li>
 </ul>
-<p>**interleaving **编码样式</p>
+<p><strong>interleaving</strong> 编码样式</p>
 <h4 id="奇偶校验码"><a href="#奇偶校验码" class="headerlink" title="奇偶校验码"></a>奇偶校验码</h4><p>奇校验、偶校验        interleaving</p>
 <h4 id="校验和"><a href="#校验和" class="headerlink" title="校验和"></a>校验和</h4><p>校验和的计算</p>
 <p>例：</p>
@@ -472,17 +472,21 @@
 <h4 id="选择性重传"><a href="#选择性重传" class="headerlink" title="选择性重传"></a>选择性重传</h4><p>采用这种策略，接收方将坏帧丢弃，但缓存接下来的所有好帧。等到发送方超时，重传对应帧并最后成功到达后，将缓存的好帧递交给网络层。这种方式对应的<strong>接收方窗口大于1</strong>，如果窗口很大，则该方法对数据链路层的内存需求很大。</p>
 <p><img src="https://gitee.com/jasonstudyield/imagesbed/raw/master/20211027202506.png" srcset="/img/loading.gif" lazyload></p>
 <h4 id="发送-接收窗口大小"><a href="#发送-接收窗口大小" class="headerlink" title="发送/接收窗口大小"></a>发送/接收窗口大小</h4><ol>
-<li><p>对于<strong>回退N方法</strong>，如果说存在十六个不同的序号（二进制表示占4位），那么发送的帧最多是15个。发送窗口大小的最大值必须小于序号个数的大小。</p>
-<p><em>如果设发送最多帧数为 MAX_SEQ个</em></p>
+<li><p>对于<strong>回退N方法</strong>，如果说存在十六个不同的序号（二进制表示占4位），那么发送的帧最多是15个。<strong>发送窗口大小的最大值必须严格小于序号个数的大小。</strong></p>
+<p>而<strong>接受窗口的大小必须是1</strong></p>
+<p><del><em>如果设发送最多帧数为 MAX_SEQ个</em></del></p>
 </li>
-<li><p>对于<strong>选择性重传方法</strong>，接收窗口的最大尺寸应该不超过序号空间的一半。比如用三位来表示序号（也就是八个序号），接收窗口的大小最大为4。同时接收方的缓冲区、计时器数量也是等于接收窗口的大小（一般来说是（MAX_SEQ + 1)/2 个）</p>
+<li><p>对于<strong>选择性重传方法</strong>，接收窗口的最大尺寸应该不超过序号空间的一半。比如用三位来表示序号（也就是八个序号），接收窗口的大小最大为4。同时接收方的缓冲区、计时器数量也是等于接收窗口的大小 <del>（一般来说是（MAX_SEQ + 1)/2 个）</del></p>
+<p><strong>同时注意：发送窗口不能比接收窗口大！！</strong>，否则有可能会溢出。所以对于选择性重传方法，发送窗口的最大值也是序号空间大小的一半！</p>
 </li>
 </ol>
 <h3 id="数据链路层协议示例"><a href="#数据链路层协议示例" class="headerlink" title="数据链路层协议示例"></a>数据链路层协议示例</h3><ol>
 <li><strong>HDLC</strong> (High-level Data Link Control)</li>
 </ol>
 <ol start="2">
-<li><strong>PPP</strong> (Point-to-point Protocol)</li>
+<li><p><strong>PPP</strong> (Point-to-point Protocol)</p>
+<p>面向字节的协议</p>
+</li>
 </ol>
 
             </div>
@@ -519,6 +523,12 @@
                 <div class="post-prevnext">
                   <article class="post-prev col-6">
                     
+                    
+                      <a href="/2021/11/16/%E5%AE%89%E5%8D%93%E5%B9%B3%E6%9D%BF%E3%80%81%E7%94%9A%E8%87%B3%E6%89%8B%E6%9C%BA%E4%B9%9F%E8%83%BD%E5%86%99%E4%BB%A3%E7%A0%81%EF%BC%9FTermux%E4%BD%BF%E7%94%A8%E4%BD%93%E4%BC%9A%E5%88%86%E4%BA%AB/">
+                        <i class="iconfont icon-arrowleft"></i>
+                        <span class="hidden-mobile">安卓平板、甚至手机也能写代码？Termux使用体会分享</span>
+                        <span class="visible-mobile">上一篇</span>
+                      </a>
                     
                   </article>
                   <article class="post-next col-6">
