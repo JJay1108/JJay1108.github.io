@@ -105,5 +105,5 @@ deploy:
 - type: git
   repository: 
     github: git@github.com:JJay1108/JJay1108.github.io.git
-    coding: git@e.coding.net:idea11/idea11/idea11.git
+    ## coding: git@e.coding.net:idea11/idea11/idea11.git
   branch: master
