@@ -133,7 +133,7 @@ set nu				"在一旁显示行号
 set tabstop=4
 set shiftwidth=4	“这行和上一行是负责设置缩进宽度
 set autoindent		"设置自动缩进
-set cursorline		"使得当前光标所在行出现一条下划线（标明所在行，就和一把尺子一样）
+set cursorline		"使得当前光标所在行出现一条下划线，以标明所在行
 set showcmd			"可以显示正输入的命令
 set ruler			"显示光标现在的位置（坐标）
 set syntax=on
