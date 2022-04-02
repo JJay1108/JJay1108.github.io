@@ -1,0 +1,570 @@
+
+
+<!DOCTYPE html>
+<html lang="zh-CN" data-default-color-scheme=&#34;auto&#34;>
+
+
+
+<head>
+  <meta charset="UTF-8">
+  <link rel="apple-touch-icon" sizes="76x76" href="/img/favicon.png">
+  <link rel="icon" href="/img/favicon.png">
+  <meta name="viewport"
+        content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="#2f4154">
+  <meta name="description" content="Don&#39;t programme with coincidence.">
+  <meta name="author" content="Jason">
+  <meta name="keywords" content="">
+  
+  <title>对于Vim的一些学习感受以及Vim for C/C++配置推荐 - Study Record</title>
+
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/css/bootstrap.min.css" />
+
+
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/github-markdown-css@4.0.0/github-markdown.min.css" />
+  <link  rel="stylesheet" href="/lib/hint/hint.min.css" />
+
+  
+    
+    
+      
+      <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/highlight.js@10.7.2/styles/github-gist.min.css" />
+    
+  
+
+  
+    <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.css" />
+  
+
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_ba1fz6golrf.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_kmeydafke9r.css">
+
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+<!-- 自定义样式保持在最底部 -->
+
+
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    var CONFIG = {"hostname":"jjay1108.github.io","root":"/","version":"1.8.11","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"right","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"copy_btn":true,"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":false,"baidu":null,"google":null,"gtag":null,"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":null,"app_key":null,"server_url":null}},"search_path":"/local-search.xml"};
+  </script>
+  <script  src="/js/utils.js" ></script>
+  <script  src="/js/color-schema.js" ></script>
+<meta name="generator" content="Hexo 5.4.0"></head>
+
+
+<body>
+  <header style="height: 70vh;">
+    <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand"
+       href="/">&nbsp;<strong>studyRecorder</strong>&nbsp;</a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/">
+                <i class="iconfont icon-home-fill"></i>
+                首页
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/archives/">
+                <i class="iconfont icon-archive-fill"></i>
+                归档
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/categories/">
+                <i class="iconfont icon-category-fill"></i>
+                分类
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/tags/">
+                <i class="iconfont icon-tags-fill"></i>
+                标签
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/about/">
+                <i class="iconfont icon-user-fill"></i>
+                关于
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" target="_self" data-toggle="modal" data-target="#modalSearch">&nbsp;<i
+                class="iconfont icon-search"></i>&nbsp;</a>
+          </li>
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" target="_self">&nbsp;<i
+                class="iconfont icon-dark" id="color-toggle-icon"></i>&nbsp;</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+    <div class="banner" id="banner" parallax=true
+         style="background: url('/img/default.png') no-repeat center center;
+           background-size: cover;">
+      <div class="full-bg-img">
+        <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+          <div class="page-header text-center fade-in-up">
+            <span class="h2" id="subtitle" title="对于Vim的一些学习感受以及Vim for C/C++配置推荐">
+              
+            </span>
+
+            
+              <div class="mt-3">
+  
+  
+    <span class="post-meta">
+      <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+      <time datetime="2022-01-09 00:00" pubdate>
+        2022年1月9日 凌晨
+      </time>
+    </span>
+  
+</div>
+
+<div class="mt-1">
+  
+    
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-chart"></i>
+      4.1k 字
+    </span>
+  
+
+  
+    
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-clock-fill"></i>
+      
+      
+      45
+       分钟
+    </span>
+  
+
+  
+  
+</div>
+
+            
+          </div>
+
+          
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid nopadding-x">
+  <div class="row nomargin-x">
+    <div class="d-none d-lg-block col-lg-2"></div>
+    <div class="col-lg-8 nopadding-x-md">
+      <div class="container nopadding-x-md" id="board-ctn">
+        <div class="py-5" id="board">
+          <article class="post-content mx-auto">
+            <!-- SEO header -->
+            <h1 style="display: none">对于Vim的一些学习感受以及Vim for C/C++配置推荐</h1>
+            
+            <div class="markdown-body">
+              <h1 id="初学者对于Vim的一些学习感受以及Vim-for-C-C-配置推荐"><a href="#初学者对于Vim的一些学习感受以及Vim-for-C-C-配置推荐" class="headerlink" title="初学者对于Vim的一些学习感受以及Vim for C/C++配置推荐"></a>初学者对于Vim的一些学习感受以及Vim for C/C++配置推荐</h1><h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p>已经有很长时间没有写过什么总结或者知识点整理了，上次写东西还是写了一篇关于termux的使用。</p>
+<p>期末考完了，我也彻底boom了，十二月一直在肝各种ddl，什么计网实验，公共课期末考核等等……这学期概率论和OS是我学的最不牢靠的两门课，计网倒是勉强还凑合。再加上我校按排名定GPA（<del>什么nc规定啊</del>），这学期前本还想着好好学习，想办法把成绩拉上来一点好出去读水硕混个学历，结果大概率这学期是没了。</p>
+<h3 id="话说回来，我为什么要学习并配置Vim？"><a href="#话说回来，我为什么要学习并配置Vim？" class="headerlink" title="话说回来，我为什么要学习并配置Vim？"></a>话说回来，我为什么要学习并配置Vim？</h3><p>因为我想在Linux环境下写代码，Windows对于我更适合日常娱乐。Linux相较于Windows，配置环境也更加的方便。（但烦人的地方还是烦）</p>
+<p>有兄弟可能会说：Linux环境下用VSCode不香吗？用IDE(如CLion, QT Creator，轻量的有Code::Blocks, CodeLite, Geany……)不香吗？</p>
+<p>我觉得，确实很香！好用就完事了啊！！！！</p>
+<p><em><strong>但如果我没有图形化界面怎么办？</strong></em></p>
+<p>这个学期我租用了某云的轻量应用服务器；只能用Terminal远程SSH写程序的我，自然逃不掉Vim的使用了。</p>
+<p>除了这个所谓的“<strong>刚需</strong>”，个人学习Vim操作并配置Vim，纯粹是自己喜欢折腾，想尝试新东西（对我个人来说），并且这学期我还“有时间”。（问就是这学期代码量少得可怜，所以有“时间”瞎搞，<del>另外不拿键盘敲点什么，人就感觉不舒服</del>）</p>
+<p><strong>另外，</strong></p>
+<p><strong>这篇文章不敢说是什么入门教程，连“学习心得”都不一定算得上，但我想分享一些我自己配置折腾Vim的感受，请各路大佬或者IDE党勿喷！绝无显摆或是踩一捧一的意思）</strong>我也没有上过y总的Linux课，文章内容若存在重复的，请见谅！</p>
+<h3 id="参考的一些资料"><a href="#参考的一些资料" class="headerlink" title="参考的一些资料"></a>参考的一些资料</h3><p>这里也得感谢某乎，精准推送了Vim相关内容，我就进了Vim的坑。</p>
+<p>另外，某乎以及广大的互联网世界（包括AcWing在内）有不少大佬出没，如@韦易笑，会分享一些Vim相关配置还有好用的插件介绍。有兴趣的同学可以自行搜索~</p>
+<h2 id="正文"><a href="#正文" class="headerlink" title="正文"></a>正文</h2><p>本文是面向刚入坑Vim的新人的（其实我也是新人），希望能对同学们有所帮助。接下来从<strong>如何上手</strong>，一些<strong>键位技巧（辅助记忆）</strong>，<strong>Vim个性化配置</strong>等分别来介绍。在写这篇文章时，本人使用的环境是：Debian 11, Vim 8.2    （Ubuntu20.04，Vim8.1应该也是适用的）</p>
+<h3 id="如何上手"><a href="#如何上手" class="headerlink" title="如何上手"></a>如何上手</h3><p>在Linux环境下安装Vim是很简单的，只需要命令行输入<code>sudo apt install vim</code>即可（如果是普通用户）。</p>
+<p>终端中输入<code>vim --version</code>，即可查看Vim版本，以及一些功能的支持。例如：</p>
+<p><img src="https://gitee.com/jasonstudyield/imagesbed/raw/master/20220109023231.png" srcset="/img/loading.gif" lazyload alt="image-20220109023231766"></p>
+<p>最简单粗暴的一个方法，上网搜索Vim键位去多打多练，形成所谓的肌肉记忆。</p>
+<p>另外，直接在终端里输入<code>vimtutor</code>，跟着官方教程来练习也是个不错的选择。但前提是你英语过得去，不过网上也有vimtutor中文翻译可供参考。</p>
+<p>另外我还看过一个不错的vim教程<em>《简明Vim练级攻略》</em>，大家可以自行搜索。</p>
+<p>但熟练掌握Vim键位还是需要不断地练习，这个过程可能会比较痛苦。（这也许就是Vim劝退大部分人的原因吧）但掌握了Vim键位，敲击键盘的感觉真的让人很舒服。</p>
+<h3 id="键位记忆技巧"><a href="#键位记忆技巧" class="headerlink" title="键位记忆技巧"></a>键位记忆技巧</h3><p>Vim作为一种编辑器，其特点就是命令及输入内容的分离。Vim有多个模式，最常用的是Insert插入模式以及Normal常规模式。</p>
+<p>当然还有其他的一些模式，比如Visual可视模式，也是很常用的。</p>
+<p>所以可以根据首字母来进入不同的模式。刚进入Vim，默认是在Normal常规模式下。比如输入<code>i</code>进入Insert 模式， 输入<code>v</code>进入Visual可视化模式。敲<code>&lt;ESC&gt;</code>键则是离开当前模式，回到Normal模式。在Normal模式下输入<code>:</code>则是进入了命令模式，比如stackoverflow的高赞问题 <em>如何退出Vim编辑器？</em>输入<code>:q</code>即可。（q即quit）</p>
+<p><strong>这里我想先特别强调出一个键位</strong> <code>&lt;ESC&gt;</code>，这个键位可以说是除了英文字母以外，使用频率很高的一个键。但！这个键却在大部分键盘上，离我们的手相当的远，未免有些反人类了。这里提供一些解决方法：</p>
+<ol>
+<li>更改键盘映射，把CAPS LOCK映射成CTRL</li>
+<li>用<code>ctrl</code> + <code>[</code> 代替<code>Esc</code>键，在vim中，ctrl + [ 是等效于Esc键的。</li>
+<li>对于输入<code>ctrl</code>键，对于一大部分人来说，仍然是不太顺利的。这个时候可以选择如同(1)的方法，互换CAPS LOCK和Ctrl的映射。此外，我根据网上的讨论，发现有前辈选择用小拇指根，或者手掌的外边沿侧（大约是靠近小指以下的区域）去敲击<code>Ctrl</code>。本以为这样误触会比较多，但实际体验下来，几乎是没有误触，只是感觉可能会略有些奇怪hh</li>
+<li>自定义配置，映射某些键作为<code>ESC</code>，这个待会儿具体在<strong>自定义配置</strong>部分讨论。</li>
+</ol>
+<p>我本人使用的是<code>ctrl</code>+<code>[</code>来代替escape键，体验也很顺畅，没有什么问题（除了有的时候力气太小导致ctrl没触发到）。</p>
+<p><em>顺便说句，为什么有些键位那么的反人类？因为，那个时候的键盘布局和现在还是有挺大区别的。默认的键位映射放到现在，也是属于“历史遗留问题”了</em></p>
+<p><strong>说回正题！</strong>vim的键位是比较复杂的，功能也很多，例如<code>y</code>,<code>gg</code>,<code>G</code>,<code>i</code>,<code>A</code>,<code>d</code>,<code>o</code>,<code>0</code>等等。</p>
+<p><code>y</code>的作用是复制，输入<code>yy</code>则会复制当前光标所在行。<code>y</code>其实代表的是 yank，有复制的含义。</p>
+<p>再比如，<code>dd</code>是删除当前行，<code>dw</code>则是删除当前光标到下一个空格的内容。<code>daw</code>则是可以删除当前光标所在单词（delete a word）。还有<code>di(</code> <code>di[</code>,这是删除相应括号内的内容（delete in ()/ delete in []）。</p>
+<p>还有<code>A</code>键，光标会移动到当前行末尾，并进入Insert模式。A代表Append…..</p>
+<p>通过英文单词来辅助记忆一些键位，并加以一定量的训练。正常流畅的使用是指日可待的。</p>
+<h3 id="Vim个性化配置"><a href="#Vim个性化配置" class="headerlink" title="Vim个性化配置"></a>Vim个性化配置</h3><p>Vim有一批“信徒”“狂热爱好者”的原因就是：Vim可以自由定制，自己想怎么玩怎么玩。几乎想映射什么键到什么键都可以实现！</p>
+<p>Vim的配置文件是<code>.vimrc</code>，可以在用户目录<code>home/username/</code> 也就是<code>~</code>目录下进行配置。</p>
+<p>终端中输入<code>vim ~/.vimrc</code>，即可创建Vim的配置文件。</p>
+<blockquote>
+<p> 另外：</p>
+<p>还有人习惯在用户目录下创建<code>.vim</code>文件夹，然后在<code>.vim</code>文件夹中新建一个Vim配置文件，即<code>vim ~/.vim/.vimrc</code>（这样做可以方便使用git，对.vim文件夹进行同步，从而达到不同机器上的配置统一）。</p>
+<p>我个人的习惯也是用户目录下创建一个.vimrc文件，即<code>vim ~/.vimrc</code>，随后在~/.vim/.vimrc中配置真正想要</p>
+<p>至于<code>~/.vimrc</code>的内容，如下所示，仅一行即可：</p>
+</blockquote>
+<p><img src="https://gitee.com/jasonstudyield/imagesbed/raw/master/20220109041759.png" srcset="/img/loading.gif" lazyload alt="image-20220109041759482"></p>
+<blockquote>
+<p>如果采用和我类似方法的同学这里不要有差错或遗漏，否则可能会报错。</p>
+</blockquote>
+<h4 id="一些基本的"><a href="#一些基本的" class="headerlink" title="一些基本的.."></a>一些基本的..</h4><p>下面是个人Vim配置的一小部分</p>
+<figure class="highlight routeros"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><code class="hljs routeros"><span class="hljs-builtin-name">set</span> <span class="hljs-attribute">showtabline</span>=2	<span class="hljs-string">&quot;tabline强制显示</span><br><span class="hljs-string">set nu				&quot;</span>在一旁显示行号<br><span class="hljs-builtin-name">set</span> <span class="hljs-attribute">tabstop</span>=4<br><span class="hljs-builtin-name">set</span> <span class="hljs-attribute">shiftwidth</span>=4	“这行和上一行是负责设置缩进宽度<br><span class="hljs-builtin-name">set</span> autoindent		<span class="hljs-string">&quot;设置自动缩进</span><br><span class="hljs-string">set cursorline		&quot;</span>使得当前光标所在行出现一条下划线，以标明所在行<br><span class="hljs-builtin-name">set</span> showcmd			<span class="hljs-string">&quot;可以显示正输入的命令</span><br><span class="hljs-string">set ruler			&quot;</span>显示光标现在的位置（坐标）<br><span class="hljs-builtin-name">set</span> <span class="hljs-attribute">syntax</span>=on<br></code></pre></td></tr></table></figure>
+
+<p>相信各位也发现了，<code>vimscript</code>的语法并不难，自己也可以通过模仿别人的样例，来修修改改，配置自己的<code>.vimrc</code>。</p>
+<h4 id="leader键是干嘛用的？"><a href="#leader键是干嘛用的？" class="headerlink" title="leader键是干嘛用的？"></a>leader键是干嘛用的？</h4><p>接下来是关于<code>leader</code>键的设置，<code>leader</code>键对于vim个性化操作是非常重要的。</p>
+<p><code>let mapleader=&#39;,&#39;</code>    我个人把<code>leader</code>设为了逗号<code>,</code>        而这里完全可以根据个人喜好来设置。</p>
+<p>如果有同学和我一样，<strong>对Vim配置文件需要做大量修改的</strong>。可以选择定制键位如下：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs js"><span class="hljs-string">&quot;quickly edit the .vimrc</span><br><span class="hljs-string">nnoremap &lt;silent&gt; &lt;leader&gt;ee :e ~/.vim/.vimrc&lt;CR&gt;	&quot;</span>&lt;CR&gt;是回车键<br></code></pre></td></tr></table></figure>
+
+<p>这样，在Normal模式下，输入leader键+连续两个<code>e</code>，就能快速打开<code>.vimrc</code>来进行查看并编辑。</p>
+<p><strong>注：</strong>这里的<code>nnoremap</code> 实际含义是(in)normal mode, no re- map，意指在normal模式下，不进行重映射（重映射也就是键位可以映射再映射的意思），一次映射完结束。</p>
+<p>同理，<code>inoremap</code> 实际含义是(in)insert mode, no re- map</p>
+<h4 id="Vim难道也有外观党？"><a href="#Vim难道也有外观党？" class="headerlink" title="Vim难道也有外观党？"></a>Vim难道也有外观党？</h4><p>大部分同学通常会发现，一些大佬的Vim配置得“花里胡哨”，功能多还好看！</p>
+<p>下面是一些外观方面的设置</p>
+<figure class="highlight json"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><code class="hljs json">if exists(&#x27;$TMUX&#x27;)<br>	set term=screen<span class="hljs-number">-256</span>color<br>endif<br><span class="hljs-comment">//兼容TMUX的使用</span><br><br>colorscheme koehler 	<span class="hljs-string">&quot;设置Vim主题颜色为koehler</span><br><span class="hljs-string">&quot;</span>colorscheme solarized<br><span class="hljs-string">&quot;colorscheme desert 	</span><br><span class="hljs-string"></span><br><span class="hljs-string">if has (&#x27;gui_running&#x27;)</span><br><span class="hljs-string">	set background=light</span><br><span class="hljs-string">else</span><br><span class="hljs-string">	set background=dark</span><br><span class="hljs-string">endif</span><br><span class="hljs-string"></span><br><span class="hljs-string">set t_Co = 256</span><br><span class="hljs-string"></span><br><span class="hljs-string">if has (&quot;</span>termguicolors<span class="hljs-string">&quot;)</span><br><span class="hljs-string">	set termguicolors</span><br><span class="hljs-string">endif</span><br></code></pre></td></tr></table></figure>
+
+<p>你可以使用Vim时，进入Normal模式，然后输入<code>:colorscheme </code>+ 你喜欢的颜色，</p>
+<p>例如<code>:colorscheme solarized</code>，就可以查看当前颜色主题（solarized）下的效果。</p>
+<p>然后在<code>.vimrc</code>里，固定下你想要的颜色即可（当然也可以设置随机配色）</p>
+<p><strong>虽然，更加重要的是，终端的颜色…！！！</strong></p>
+<h4 id="C-C-快速编译-运行一段代码"><a href="#C-C-快速编译-运行一段代码" class="headerlink" title="C/C++快速编译+运行一段代码"></a>C/C++快速编译+运行一段代码</h4><p>如下所示：</p>
+<figure class="highlight json"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><code class="hljs json"><span class="hljs-string">&quot;---------------QUICK COMPILE---------</span><br><span class="hljs-string">nnoremap r :call CompileRunGcc()&lt;CR&gt;</span><br><span class="hljs-string"></span><br><span class="hljs-string">function! CompileRunGcc()</span><br><span class="hljs-string">	execute &quot;</span>w<span class="hljs-string">&quot;</span><br><span class="hljs-string">	if &amp;filetype == &#x27;c&#x27;</span><br><span class="hljs-string">		if !isdirectory(&#x27;build&#x27;)</span><br><span class="hljs-string">			execute &quot;</span>!mkdir build<span class="hljs-string">&quot;</span><br><span class="hljs-string">		endif	</span><br><span class="hljs-string">		execute &quot;</span>!gcc % -o build/%&lt; -g<span class="hljs-string">&quot;</span><br><span class="hljs-string">		execute &quot;</span>!time ./build/%&lt;<span class="hljs-string">&quot;</span><br><span class="hljs-string">	endif	</span><br><span class="hljs-string"></span><br><span class="hljs-string">	if &amp;filetype == &quot;</span>cpp<span class="hljs-string">&quot; </span><br><span class="hljs-string">		if !isdirectory(&#x27;build&#x27;)</span><br><span class="hljs-string">			execute &quot;</span>!mkdir build<span class="hljs-string">&quot;</span><br><span class="hljs-string">		endif	</span><br><span class="hljs-string">		execute &quot;</span>!g++ % -o build/%&lt; -g<span class="hljs-string">&quot;</span><br><span class="hljs-string">		execute &quot;</span>!time ./build/%&lt;<span class="hljs-string">&quot;</span><br><span class="hljs-string">	endif</span><br><span class="hljs-string">endfunction	</span><br></code></pre></td></tr></table></figure>
+
+<p>比如写了一个hello_world.cpp，进入normal模式，然后按下<code>r</code>，就能直接在当前目录下编译，并把可执行文件放入了当前目录的<code>build</code>文件夹中（不污染代码文件），并执行可执行文件。</p>
+<h3 id="Vim插件"><a href="#Vim插件" class="headerlink" title="Vim插件"></a>Vim插件</h3><p>网上有很多，包括AcWing上也有不少大佬，分享了自己的Vim配置，包括括号补全这种功能也是手动实现。我只能说一句respect！</p>
+<p>但正是丰富的Vim插件，让我彻底爱上了这款编辑器。喜欢DIY电脑的我，也特别享受给自己编辑器装插件，实现功能的过程。</p>
+<p>但在此之前，我要先介绍一款插件管理工具：<code>vim-plug</code>，这将大大方便Vim维护插件的易用性。</p>
+<h4 id="插件管理工具：vim-plug"><a href="#插件管理工具：vim-plug" class="headerlink" title="插件管理工具：vim-plug"></a>插件管理工具：vim-plug</h4><p>详细的如何安装，如何使用可以参考Github上该项目的README。</p>
+<p>但可能安装该工具（包括后续安装插件）会遇到一些网络问题（原因懂得都懂），可以采取科学上网的方式解决；或是换镜像源来方便使用。换源的方式可以自行查询；如果有可能，我也可能会写一篇有关Linux环境遇到的坑。</p>
+<h4 id="有关写代码、阅读代码的插件"><a href="#有关写代码、阅读代码的插件" class="headerlink" title="有关写代码、阅读代码的插件"></a>有关写代码、阅读代码的插件</h4><p>声明：这些插件几乎全部可以在Github上找到，一些如何安装、使用的基本问题以官方文档为准。在这里还推荐一个网站叫VimAwesome，是对刚接触插件的新人的一个”宝藏网站“。</p>
+<ol>
+<li><p><code>vim-cpp-enhanced-highlight</code></p>
+<p>提供C/C++的高亮显示</p>
+</li>
+<li><p><code>auto-pairs</code></p>
+<p>这个顾名思义，就是提供了括号补全功能</p>
+</li>
+<li><p><code>ale</code></p>
+<p>这个插件就比较有意思了，支持异步检错，同时它还可以和<code>cppcheck</code>等工具产生类似“联动”的效果，可能的内存泄漏都能检测出来。<del>虽然我cppcheck就被配置成功过</del>    但是<code>ale</code>也是一个非常庞大的插件，功能也不仅仅限于检错这一种，所以ale也需要自己的配置；也可参考网上大佬的配置。</p>
+</li>
+<li><p><code>YouCompleteMe</code>,简称YCM</p>
+<p>一款很强的智能补全插件（支持多语言），但要一番功夫进行配置。本人并没有采用YCM.</p>
+</li>
+<li><p><code>coc.nvim</code></p>
+<p>这款插件，我最初知道是因为它能比较方便地进行补全（同样支持多语言）。但实际上，<code>coc</code>的野心绝不至于此，他的目标似乎是把Vim打造成另一个VSCode（？？？）这里就不做过多的阐述，感兴趣的同学可以自行查询资料。</p>
+<p>这是我个人使用<code>coc.nvim</code>的效果图：</p>
+<p><img src="https://gitee.com/jasonstudyield/imagesbed/raw/master/20220109213343.png" srcset="/img/loading.gif" lazyload alt="image-20220109213343483"></p>
+</li>
+<li><p>配置<code>ctags</code>和<code>gutentags</code></p>
+<p>tags其实是阅读项目所需要的。这里由于篇幅限制，就不再赘述。</p>
+</li>
+<li><p><code>nerdtree</code></p>
+<p>这款插件，提供了文件树的效果。</p>
+<p>但我现在已经把他替换成了<code>coc-explorer</code>，而这是<code>coc.nvim</code>的扩展插件（属于是插件的插件，套娃了）</p>
+</li>
+<li><p><code>LeaderF</code>（需要python支持）</p>
+<p>这是一款支持模糊查找的插件，也是国人开发的一款Vim插件，功能很多，也很好用，我直接将之替代了下面的Tagbar</p>
+</li>
+<li><p><code>tagbar</code></p>
+<p>配置好tags之后，tagbar就能在一旁显示出效果。</p>
+<p>这是<code>tagbar</code>的效果图：</p>
+<p><img src="https://gitee.com/jasonstudyield/imagesbed/raw/master/20220109205930.png" srcset="/img/loading.gif" lazyload alt="image-20220109205929880"></p>
+<p><em>当然，这是github上一个sudoku项目的代码，不是我自己的代码….</em></p>
+</li>
+</ol>
+<p>​        这是之前所提到的我用来替代<code>tagbar</code>的东西，这也只是<code>Leaderf</code>的其中一个功能而已（当然也需要tags已经配置好）…:</p>
+<p>​        <img src="https://gitee.com/jasonstudyield/imagesbed/raw/master/20220109210159.png" srcset="/img/loading.gif" lazyload alt="image-20220109210159269"></p>
+<h4 id="外观插件"><a href="#外观插件" class="headerlink" title="外观插件"></a>外观插件</h4><ol>
+<li><code>vim-airline</code></li>
+<li><code>vim-airline-themes</code></li>
+<li><code>vim-airline-clock</code></li>
+</ol>
+<p>这三个插件以<code>airline</code>为基础，给较为单调的Vim界面增添了几分活力（其实就是上图中，底部状态栏一样的东西）。<code>airline</code>也有不少可以设置的地方，留下了给外观党折腾的空间。</p>
+<h4 id="补充"><a href="#补充" class="headerlink" title="补充"></a>补充</h4><p>未提到的插件（如<code>vim-spector</code>，据说是一款debug神器），我自己可能未上手体验过，或是遗忘了。在这里就不做贸然的推荐，了解的大佬也可以补充~</p>
+<p>另外有些插件需要一定环境的支持，比如<code>Leaderf</code>需要Python支持，Debian软件源中的Vim似乎并不支持python，还需要下载源码进行手动编译安装，过程较复杂，且容易出错（但Ubuntu就不用）。    而很好用的<code>coc.nvim</code>功能多，也需要nodejs的支持。如遇到插件的问题，还是要多参考官方docs/wiki。</p>
+<h2 id="后记"><a href="#后记" class="headerlink" title="后记"></a>后记</h2><p>写完这篇文章，我开始思考：<em>我配置Vim的意义在哪里？</em></p>
+<p>我喜欢在自己感兴趣的东西上投入时间，我也没有因为配置Vim，而荒废了学业（虽然这学期我的OS理论课和实践大概率糊了）。我也不是一个喜欢打游戏的人，Steam库的游戏吃灰一个学期了就没打过，在课余时间折腾Linux也好，Vim也好，搞内网穿透也好，也算是我娱乐的一种方式吧。另外，仍有一批前辈在给Vim 或 Neovim 贡献自己的力量，也非常感谢这些前辈的努力！</p>
+<p>期末前，恰应计网实践课要求，拿自己配置的Vim写了个简单的socket的demo程序，体验还ok。</p>
+<p>这也是我第一次写那么长的总结。<strong>若有需要提意见的，都可以在评论区直接指出，我将不胜感激。</strong>（如果这东西真有人看的话）</p>
+<p>这个寒假不出意外，我会多刷点算法题，数据结构这块我一直学的不扎实；另外学学网络编程这方面的东西；还有太多要补的： Makefile, gdb,  CMake, etc. 下学期要学数据库了，寒假里试着跟个CMU15-445学学其实也不错。虽然现在列了很多要做的，但哪怕最后只有一件事情做好了，也还不错了233</p>
+
+            </div>
+            <hr>
+            <div>
+              <div class="post-metas mb-3">
+                
+                  <div class="post-meta mr-3">
+                    <i class="iconfont icon-category"></i>
+                    
+                      <a class="hover-with-bg" href="/categories/%E7%8E%AF%E5%A2%83-%E5%B7%A5%E5%85%B7%E9%85%8D%E7%BD%AE/">环境/工具配置</a>
+                    
+                  </div>
+                
+                
+                  <div class="post-meta">
+                    <i class="iconfont icon-tags"></i>
+                    
+                      <a class="hover-with-bg" href="/tags/vim/">vim</a>
+                    
+                      <a class="hover-with-bg" href="/tags/%E6%8A%98%E8%85%BE/">折腾</a>
+                    
+                  </div>
+                
+              </div>
+              
+                <p class="note note-warning">
+                  
+                    本博客所有文章除特别声明外，均采用 <a target="_blank" href="https://creativecommons.org/licenses/by-sa/4.0/deed.zh" rel="nofollow noopener noopener">CC BY-SA 4.0 协议</a> ，转载请注明出处！
+                  
+                </p>
+              
+              
+                <div class="post-prevnext">
+                  <article class="post-prev col-6">
+                    
+                    
+                      <a href="/2022/01/14/2022-01-14-%E8%99%9A%E6%8B%9F%E6%9C%BA%E5%A6%82%E4%BD%95%E4%BD%BF%E7%94%A8clash%E4%BB%A3%E7%90%86%E9%85%8D%E7%BD%AE/">
+                        <i class="iconfont icon-arrowleft"></i>
+                        <span class="hidden-mobile">虚拟机如何使用clash代理</span>
+                        <span class="visible-mobile">上一篇</span>
+                      </a>
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                      <a href="/2021/11/16/%E5%AE%89%E5%8D%93%E5%B9%B3%E6%9D%BF%E3%80%81%E7%94%9A%E8%87%B3%E6%89%8B%E6%9C%BA%E4%B9%9F%E8%83%BD%E5%86%99%E4%BB%A3%E7%A0%81%EF%BC%9FTermux%E4%BD%BF%E7%94%A8%E4%BD%93%E4%BC%9A%E5%88%86%E4%BA%AB/">
+                        <span class="hidden-mobile">安卓平板、甚至手机也能写代码？Termux使用体会分享</span>
+                        <span class="visible-mobile">下一篇</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </article>
+                </div>
+              
+            </div>
+
+            
+          </article>
+        </div>
+      </div>
+    </div>
+    
+      <div class="d-none d-lg-block col-lg-2 toc-container" id="toc-ctn">
+        <div id="toc">
+  <p class="toc-header"><i class="iconfont icon-list"></i>&nbsp;目录</p>
+  <div class="toc-body" id="toc-body"></div>
+</div>
+
+      </div>
+    
+  </div>
+</div>
+
+<!-- Custom -->
+
+
+    
+
+    
+      <a id="scroll-top-button" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
+
+    
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">搜索</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v"
+                 for="local-search-input">关键词</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+
+    
+  </main>
+
+  <footer class="text-center mt-5 py-3">
+  <div class="footer-content">
+     <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a> <i class="iconfont icon-love"></i> <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener"><span>Fluid</span></a> 
+  </div>
+  
+
+  
+
+  
+</footer>
+
+
+  <!-- SCRIPTS -->
+  
+  <script  src="https://cdn.jsdelivr.net/npm/nprogress@0.2.0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/nprogress@0.2.0/nprogress.min.css" />
+
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":100})
+    NProgress.start()
+    window.addEventListener('load', function() {
+      NProgress.done();
+    })
+  </script>
+
+
+<script  src="https://cdn.jsdelivr.net/npm/jquery@3.6.0/dist/jquery.min.js" ></script>
+<script  src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/js/bootstrap.min.js" ></script>
+<script  src="/js/events.js" ></script>
+<script  src="/js/plugins.js" ></script>
+
+<!-- Plugins -->
+
+
+  
+    <script  src="/js/img-lazyload.js" ></script>
+  
+
+
+
+  
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/tocbot@4.12.3/dist/tocbot.min.js" ></script>
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.js" ></script>
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/anchor-js@4.3.1/anchor.min.js" ></script>
+
+
+
+  <script defer src="https://cdn.jsdelivr.net/npm/clipboard@2.0.8/dist/clipboard.min.js" ></script>
+
+
+
+  <script  src="/js/local-search.js" ></script>
+
+
+
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/typed.js@2.0.12/lib/typed.min.js" ></script>
+  <script>
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var title = document.getElementById('subtitle').title;
+      
+      typing(title)
+      
+    })(window, document);
+  </script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!-- 主题的启动项 保持在最底部 -->
+<script  src="/js/boot.js" ></script>
+
+
+</body>
+</html>

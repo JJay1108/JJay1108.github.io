@@ -185,7 +185,7 @@
     
     <span class="post-meta mr-2">
       <i class="iconfont icon-chart"></i>
-      3.3k 字
+      3.4k 字
     </span>
   
 
@@ -195,7 +195,7 @@
       <i class="iconfont icon-clock-fill"></i>
       
       
-      36
+      37
        分钟
     </span>
   
@@ -437,11 +437,11 @@
 <li>提供面向无连接的服务且带确认，如802.11无线网络（差错率较高）</li>
 <li>带确认的面向连接服务</li>
 </ol>
-<p><strong>成帧方法</strong></p>
-<ol>
+<h4 id="成帧方法"><a href="#成帧方法" class="headerlink" title="成帧方法"></a>成帧方法</h4><ol>
 <li>字节计数    2. 带字节填充的首尾定界符法     3. 带比特填充的首尾定界符法    4.  物理层编码违例法</li>
 </ol>
-<p><strong>差错控制</strong><br>如：检错码    前向纠错码    重传机制</p>
+<p><strong>对于字节填充</strong></p>
+<h4 id="差错控制"><a href="#差错控制" class="headerlink" title="差错控制"></a>差错控制</h4><p>如：检错码    前向纠错码    重传机制</p>
 <p><strong>流量控制</strong></p>
 <h3 id="差错检测和纠正"><a href="#差错检测和纠正" class="headerlink" title="差错检测和纠正"></a>差错检测和纠正</h3><h4 id="海明码"><a href="#海明码" class="headerlink" title="海明码"></a>海明码</h4><ul>
 <li><p>海明距离的计算</p>
@@ -459,6 +459,7 @@
 <p>前面多出的10加到0100上，相应得到二进制位串，接下去进行取反（0110）取反得到（1001），对应十进制数为9。在进行一波验证：</p>
 <p>如图所示</p>
 <p><img src="https://gitee.com/jasonstudyield/imagesbed/raw/master/20211022000459.png" srcset="/img/loading.gif" lazyload></p>
+<p>接收方的检验：把含校验和的字段和之前的被校验的数据共同求和，之后取反。若答案为0，则检测出没有错误（不代表没有错误，因为Internet Checksum的局限性）</p>
 <h4 id="循环冗余校验码CRC"><a href="#循环冗余校验码CRC" class="headerlink" title="循环冗余校验码CRC"></a>循环冗余校验码CRC</h4><h3 id="基本的数据链路层协议"><a href="#基本的数据链路层协议" class="headerlink" title="基本的数据链路层协议"></a>基本的数据链路层协议</h3><blockquote>
 <p>重点掌握<strong>PAR(Positive Acknowledgement with Retransmission)/ARQ（Automatic Repeat reQuest）方法。</strong></p>
 </blockquote>
